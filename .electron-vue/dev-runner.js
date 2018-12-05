@@ -11,6 +11,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
+const BrowserWindow = electron.BrowserWindow
 
 let electronProcess = null
 let manualRestart = false
@@ -43,9 +44,9 @@ function startRenderer () {
     rendererConfig.entry.renderer = [path.join(__dirname, 'dev-client')].concat(rendererConfig.entry.renderer)
 
     const compiler = webpack(rendererConfig)
-    hotMiddleware = webpackHotMiddleware(compiler, { 
-      log: false, 
-      heartbeat: 2500 
+    hotMiddleware = webpackHotMiddleware(compiler, {
+      log: false,
+      heartbeat: 2500
     })
 
     compiler.plugin('compilation', compilation => {
@@ -82,6 +83,9 @@ function startMain () {
     mainConfig.entry.main = [path.join(__dirname, '../src/main/index.dev.js')].concat(mainConfig.entry.main)
 
     const compiler = webpack(mainConfig)
+
+    // let win = new BrowserWindow()
+    // win.webContents.openDevTools()
 
     compiler.plugin('watch-run', (compilation, done) => {
       logStats('Main', chalk.white.bold('compiling...'))

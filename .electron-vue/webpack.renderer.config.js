@@ -64,9 +64,9 @@ let rendererConfig = {
         }
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(svg|png|jpe?g|gif)(\?.*)?$/,
         use: {
-          loader: 'url-loader',
+          loader: 'file-loader',
           query: {
             limit: 10000,
             name: 'imgs/[name]--[folder].[ext]'
@@ -82,7 +82,7 @@ let rendererConfig = {
         }
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(woff2?|ttf|otf)(\?.*)?$/,
         use: {
           loader: 'url-loader',
           query: {

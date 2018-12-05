@@ -9,13 +9,13 @@
             </div>
         </div>
           <div class="row justify-content-center" style="margin-top:20px;">
-              
+
               <div class="col-md-14 text-center">
                     <div class="seed" id="seed"><translate>ACCOUNT</translate>: {{seed.address}}</div>
               </div>
           </div>
           <div class="row justify-content-center"  style="margin-top:20px;">
-              
+
               <div class="col-md-8 text-center">
                 <b-form @submit="onSubmit" @reset="onReset" >
                   <b-form-group id="pwdgroup"
@@ -35,7 +35,7 @@
                 </b-form>
               </div>
           </div>
-      </div>            
+      </div>
 </div>
 </template>
 <script>

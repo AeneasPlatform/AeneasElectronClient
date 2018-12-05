@@ -1,24 +1,28 @@
+/* eslint-disable no-undef,no-multi-spaces */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueCookie from 'vue-cookie'
-import redirect_to from './redirect_to'
-import Queue from './queue'
+// import redirect_to from './redirect_to'
+// import Queue from './queue'
+import {BigNumber} from 'bignumber.js'
 
 Vue.use(Vuex)
 Vue.use(VueCookie)
 
-const moduleMainStore = {
+let moduleMainStore = {
   state: {
-    logged: false,
-    height: 0,
-    balance: 0,
-    unconfirmedBalance: 0,
-    seed: {}, // TODO add private key for sending messages
     appErrorMsg: '',
     appErrorMsgShow: false,
-    blocks: [],
+    exp: new BigNumber(10).pow(8),
+    logged: false,
+    height: 0,
+    balance: 0,             // but BigNumber
+    unconfirmedBalance: 0,  // but BigNumber
+    fullBalance: 0,         // but BigNumber
     showSendAsh: false,
-    exp: 10000000
+    seed: {}, // TODO add private key for sending messages
+    blocks: [],
+    transactions: []
   },
   mutations: {
     login (state) {
@@ -28,13 +32,22 @@ const moduleMainStore = {
       state.height = h
     },
     balance (state, b) {
-      state.balance = b
+      let newBalance = new BigNumber(b).dividedBy(state.exp)
+      state.balance = newBalance
     },
     unconfirmedBalance (state, b) {
-      state.unconfirmedBalance = b
+      state.unconfirmedBalance = new BigNumber(b).dividedBy(state.exp)
+    },
+
+    fullBalance (state, b) {
+      let newBalance = new BigNumber(b).dividedBy(state.exp)
+      state.fullBalance = newBalance
+    },
+    transactions (state, transactions) {
+      state.transactions = transactions
     },
     logout (state) {
-      state.logged = false,
+      state.logged = false
       state.step = 0
     },
     seed (state, seed) {
@@ -59,6 +72,19 @@ const moduleMainStore = {
       b.unshift(obj)
       if (b.length > 20) b.pop()
       state.blocks = b
+    },
+    mergeBlocks (state, blocks) {
+      console.log('merging blocks')
+      state.blocks = merge(state.blocks, blocks, 'id').sort(function (a, b) {
+        return a.height > b.height ? -1 : (a.height < b.height ? 1 : 0)
+      }).reverse()
+    },
+    mergeTransactions (state, transactions) {
+      console.log('merging transactions')
+      // TODO: cut recent transactions to 50 items. (flystyle)
+      state.transactions = merge(state.transactions, transactions, 'id').sort((a, b) => {
+        return a.timestamp > b.timestamp ? -1 : (a.timestamp < b.timestamp ? 1 : 0)
+      }).reverse()
     }
   }
 }
@@ -183,24 +209,18 @@ const store = new Vuex.Store({
       console.log(message)
       context.commit('allSeeds', message.seeds)
       context.commit('height', message.height)
-      context.commit('balance', message.balance)
-      context.commit('unconfirmedBalance', message.unconfirmedBalance)
+      context.commit('balance', message.balance.available)
+      context.commit('fullBalance', message.balance.total)
+      context.commit('unconfirmedBalance', message.balance.unconfirmed)
+      context.commit('mergeBlocks', message.lastBlocks)
+      const txs = processTransactions(context, message.lastBlocks)
+      context.commit('mergeTransactions', txs)
       if (message.loggedIn === false && context.state.step === 4) {
         console.log('logout')
         context.commit('logout')
         context.commit('step', 0)
         location.reload()
       }
-    },
-    ReturnPowBlock (context, message) {
-      console.log('WOW mined block!')
-      console.log(message)
-      context.commit('addmined', message)
-    },
-    ReturnSeedWithAddress (context, message) {
-      console.log('WOW ReturnSeedWithAddress!')
-      console.log(message)
-      context.commit('seed', message.seed)
     }
   }
 })
@@ -212,6 +232,24 @@ function merge (a, b, prop) {
     })
   })
   return reduced.concat(b)
+}
+
+function processTransactions (context, blocksArr) {
+  const transactions = []
+  const blockTransactions = blocksArr.reduce((acc, block) => {
+    block.transactions.forEach(tx => acc.push(JSON.parse(tx)))
+    return acc
+  }, [])
+
+  for (let seed in context.allSeeds) {
+    transactions.push(blockTransactions.filter(tx => 'Æx' + tx.from[0].proposition == seed.address))
+  }
+
+  for (let i = 0; i < transactions.length; ++i) {
+    transactions[i].amount = transactions[i].from[0].nonce
+    transactions[i].account = transactions[i].from[0].proposition
+  }
+  return transactions
 }
 
 store.subscribe((mutation, state) => {

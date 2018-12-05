@@ -22,10 +22,10 @@
                         <button type="button" class="btn btn-outline-light ae-border" @click="newAccount">
                             <translate>NEW ACCOUNT</translate>
                         </button>
-                        
+
                     </div>
                 </div>
-            </div>            
+            </div>
   	  </div>
 </template>
 <script>
@@ -33,8 +33,6 @@ import redirect_to from '../redirect_to'
 
 export default {
   name: 'ChooseAccount',
-  computed: {
-  },
   created: function () {
     console.log('ChooseAccount logged:' + this.$store.state.main.logged)
     console.log('ChooseAccount created!')

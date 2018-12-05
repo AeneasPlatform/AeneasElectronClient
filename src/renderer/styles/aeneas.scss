@@ -1,11 +1,12 @@
 
 $ae-bg-color: #0c0b21;
-$ae-bg-img: url(assets/Noise_bg.png);
+$ae-bg-img: url(assets/imgs/Noise_bg.png);
 $ae-signin-color: #dedee1;
 $lato-web: "LatoWeb";
 $font-family-base: $lato-web;
 body{
     font-family: $lato-web;
+    --padding-distance: 8rem;
 }
 
 .ae-enter-page {
@@ -15,7 +16,7 @@ body{
 }
 
 .ae-enter-page .gradient .container{
-    padding-top: 100px;
+    padding-top: var(--padding-distance);
 }
 
 .gradient {
@@ -34,22 +35,18 @@ h1.logotype {
 	height : 135px;
     margin : 0 auto;
     padding : 0;
-    background-color: #fff;
-    //background : url(assets/logo.svg) no-repeat 0 0/cover;
-    mask: url(assets/logo.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/logo.svg);
-
+    background : url(../renderer/assets/imgs/logo.svg) no-repeat 0 0/cover;
 }
 @media (max-width:715px) {
     .ae-enter-page  {
         padding-top: 10px;
     }
 }
- 
+
 h1.logotype a {
 	display : block;
 	height : 175px;
-	text-indent : -9999px; 
+	text-indent : -9999px;
 }
 
 .client-title {
@@ -83,10 +80,7 @@ div.logo {
 	height : 30px;
     margin : 0 auto;
     padding : 0;
-    background-color: #fff;
-    //background : url(assets/logo.svg) no-repeat 0 0/cover;
-    mask: url(assets/horizontal_logo.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/horizontal_logo.svg);
+    background : url(../renderer/assets/imgs/horizontal_logo.svg) no-repeat 0 0/cover;
 }
 
 nav .user_icon,nav .logout_icon, nav .icon_db, .icon_envelope {
@@ -94,39 +88,36 @@ nav .user_icon,nav .logout_icon, nav .icon_db, .icon_envelope {
     display: block;
     width: 20px;
     height: 22px;
-    background-color: #fff;
+}
+.icon_db {
+    background: white;
 }
 
 nav .user_icon{
-    mask: url(assets/icon_User.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_User.svg);
     width: 24px;
     height: 22px;
+    background: url(../renderer/assets/imgs/icon_User.svg) no-repeat 0 0/cover;
 }
 
 .icon_envelope{
-    mask: url(assets/icon_Envelope.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Envelope.svg);
     width: 25px;
     height: 16px;
-    background-color: #212529;
     margin-bottom: 2px;
+    background: url(../renderer/assets/imgs/icon_Envelope.svg) no-repeat 0 0/cover;
 }
 
 nav .user_icon:hover,nav .logout_icon:hover,nav .send_icon:hover::before, nav .icon_db:hover{
-    background-color: #d1d5d8;
+    background-color: #4e4c27;
 }
 
 nav .logout_icon{
     width: 15.4pt;
-    mask: url(assets/icon_Logout.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Logout.svg);
+    background: url(../renderer/assets/imgs/icon_Logout.svg) no-repeat 0 0/cover;
 }
 
 nav .icon_db{
     width: 21.5pt;
-    mask: url(assets/icon_Dashboard.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Dashboard.svg);
+    background: url(../renderer/assets/imgs/icon_Dashboard.svg) no-repeat 0 0/cover;
 }
 
 nav .send_icon{
@@ -136,7 +127,6 @@ nav .send_icon{
 nav .send_icon::before{
     content: " ";
     margin: 0 4px;
-    background-color: #fff;
     position: absolute;
     top: 50%;
     margin-top: calc(-23px/2);
@@ -144,8 +134,7 @@ nav .send_icon::before{
     width: 23px;
     height: 22px;
     display: inline-block;
-    mask: url(assets/icon_Send.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Send.svg);
+    background: url(../renderer/assets/imgs/icon_Send.svg) no-repeat 0 0/cover;
 }
 
 .badge {
@@ -158,15 +147,15 @@ nav .send_icon::before{
 
 .badge-light { color:  #eee!important }
 
-.badge-grey,.panel-grey { 
+.badge-grey,.panel-grey {
     background-color: rgba(160, 160, 160, 0.5)!important ,
 }
 
 .block-selection{
-    -webkit-user-select: none;  
-    -moz-user-select: none;  
-    -ms-user-select: none;  
-    -o-user-select: none;  
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
     user-select: none;
 }
 
@@ -183,14 +172,13 @@ nav .send_icon::before{
 }
 
 .copy-btn span{
-    background-color: #d1d5d8;
-    mask: url(assets/clippy.svg) no-repeat 0 0/cover;
     background-size: contain;
     cursor: pointer;
     display: inline-block;
     height: 31px;
     width: 25px;
     margin: 0 5px;
+    background: url(../renderer/assets/imgs/clippy.svg) no-repeat 0 0/cover;
 }
 
 .copy-btn:hover span{
@@ -203,10 +191,10 @@ nav .send_icon::before{
 }
 
 .alert-fixed {
-    position:fixed; 
-    top: 5px; 
-    right: 5px; 
-    z-index:9999; 
+    position:fixed;
+    top: 5px;
+    right: 5px;
+    z-index:9999;
 }
 
 input.ae-text {
@@ -221,9 +209,7 @@ div.ae-glyph {
     margin : 0 auto;
     padding : 0;
     display:inline-block;
-    background-color: #878691;
-    mask: url(assets/icon_Meandr.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Meandr.svg);    
+    background: url(../renderer/assets/imgs/icon_Meandr.svg) no-repeat 0 0/cover;
 }
 
 div.copy-btn-text {
@@ -234,22 +220,24 @@ div.copy-btn-text {
     margin : 0 auto;
     padding : 0;
     display:inline-block;
-    background-color: #000;
-    mask: url(assets/clippy.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/clippy.svg);    
+    background: url(../renderer/assets/imgs/clippy.svg) no-repeat 0 0/cover;
 }
 
 div.copy-btn-text:hover {
     cursor: pointer;
-    background-color: #111111;
+    background-color: #ffffff;
 }
 
 div.seed {
-   cursor: pointer; 
+   cursor: pointer;
 }
 
 div.seed:hover {
     color:$ae-signin-color;
+}
+
+.card-block {
+    overflow: scroll;
 }
 
 .blocks {
@@ -307,8 +295,8 @@ div.ae-dropdown button:hover, .show .dropdown-toggle{
 }
 
 .loader {
-    border: 16px solid #f3f3f3; 
-    border-top: 16px solid #3498db; 
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
     border-radius: 50%;
     width: 120px;
     height: 120px;

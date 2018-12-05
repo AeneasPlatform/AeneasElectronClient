@@ -8,36 +8,27 @@
                 </div>
                 <div class="card-block blocks">
                 <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col"><translate>Height</translate></th>
-                        <th scope="col"><translate>Date</translate></th>
-                        <th scope="col"><span class="icon_envelope"></span></th>
-                        <th scope="col"><translate>Type</translate></th>
-                        <th scope="col"><translate>Account</translate></th>
-                        <th scope="col"><translate>Amount</translate></th>
-                        <th scope="col"><translate>Fee</translate></th>
-                        <th scope="col"><translate>Balance</translate></th>
-                        <th scope="col"><translate>Confirm</translate></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--<tr v-bind:key="tx.id" v-for="tx in transactions">
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                        <td>{{tx}}</td>
-                    </tr>-->
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th scope="col"><translate>Transaction ID</translate></th>
+                            <th scope="col"><translate>Account</translate></th>
+                            <th scope="col"><translate>Amount</translate></th>
+                            <th scope="col"><translate>Fee</translate></th>
+                            <th scope="col"><translate>Timestamp</translate></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-bind:key="tx.id" v-for="tx in transactions">
+                            <td>{{tx.id}}</td>
+                            <td>{{tx.account}}</td>
+                            <td>{{tx.amount}}</td>
+                            <td>{{tx.fee}}</td>
+                            <td>{{tx.timestamp}}</td>
+                        </tr>
+                    </tbody>
                 </table>
                 </div>
-            </div>                        
+            </div>
         </div>
     </div>
 </template>
@@ -47,8 +38,8 @@ export default {
   methods: {
   },
   computed: {
-    blocks () {
-      return this.$store.state.main.blocks
+    transactions () {
+      return this.$store.state.main.transactions
     }
   }
 }

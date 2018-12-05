@@ -1,48 +1,48 @@
 <template>
-  	  <div class="row justify-content-center motto-title">
-            <div class="col-sm-5">
-                <div class="row justify-content-center" style="margin:20px 0">
-                    <div class="col">
-                        <span class="center-block">
-                            <div class="panel-heading">
-                                <translate>Verify your seed phrase or</translate>
-                                <a href="" @click="cancel"><translate> cancel</translate></a>
-                            </div>
-                            <div class="panel panel-grey">
-                                <div class="panel-body" style = "min-height:200px">
-                                    <button class="btn btn-sm btn-outline-light" @click="unconfirm(word)" style="margin:10px 10px;" v-bind:key="word" v-for="word in checkPassPhrase">
-                                        <span>{{word}}</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <div v-show="wordsShow" class="row justify-content-center">
-                    <div class="col" style = "min-height:200px">
-                        <span class="center-block">
-                            <button v-show="canShow(word)" class="btn btn-sm btn-outline-light" @click="clicked(word)" style="margin:10px 10px;" v-bind:key="word" v-for="word in confirmationPassPhrase">
-                                <span>{{word}}</span>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-                <div class="row justify-content-center" style="margin-top:10px">
-                    <div class="col-xs-10">
-                        <span class="center-block">
-                            <button v-show="nextStep" class="btn btn-lg btn-outline-light" @click="confirm">
-                                <translate>CONFIRM</translate>
-                            </button>
-                            <div class="alert-fixed ">
-                                <div v-show="errorComparison" class="alert alert-danger ">
-                                    <translate>Wrong phrase, try again.</translate>
-                                </div>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            </div>            
-  	  </div>
+  <div class="row justify-content-center motto-title">
+    <div class="col-sm-5">
+      <div class="row justify-content-center" style="margin:20px 0">
+        <div class="col">
+          <span class="center-block">
+            <div class="panel-heading">
+              <translate>Verify your seed phrase or</translate>
+                <a href="" @click="cancel"><translate> cancel</translate></a>
+            </div>
+            <div class="panel panel-grey">
+              <div class="panel-body" style = "min-height:200px">
+                <button class="btn btn-sm btn-outline-light" @click="unconfirm(word)" style="margin:10px 10px;" v-bind:key="word" v-for="word in checkPassPhrase">
+                  <span>{{word}}</span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div v-show="wordsShow" class="row justify-content-center">
+        <div class="col" style = "min-height:200px">
+          <span class="center-block">
+            <button v-show="canShow(word)" class="btn btn-sm btn-outline-light" @click="clicked(word)" style="margin:10px 10px;" v-bind:key="word" v-for="word in confirmationPassPhrase">
+              <span>{{word}}</span>
+                </button>
+          </span>
+        </div>
+      </div>
+      <div class="row justify-content-center" style="margin-top:10px">
+        <div class="col-xs-10">
+          <span class="center-block">
+            <button v-show="nextStep" class="btn btn-lg btn-outline-light" @click="confirm">
+              <translate>CONFIRM</translate>
+            </button>
+            <div class="alert-fixed ">
+              <div v-show="errorComparison" class="alert alert-danger ">
+                <translate>Wrong phrase, try again.</translate>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import redirect_to from '../redirect_to'
@@ -110,6 +110,7 @@ export default {
       return !this.checkPassPhrase.includes(word)
     },
     confirm: function () {
+    // eslint-disable-next-line no-unused-vars
       var obj = this.$socket.sendObj({msg: {action: 'ConfirmPassPhrase', passphrase: this.checkPassPhrase}})
     },
     cancel: function () {
