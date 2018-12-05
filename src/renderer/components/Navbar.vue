@@ -3,7 +3,6 @@
         <b-navbar-brand class="navbar-brand" href="#"><div class="logo">&nbsp;</div></b-navbar-brand>
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-
         <b-collapse is-nav id="nav_collapse">
 
             <b-navbar-nav>

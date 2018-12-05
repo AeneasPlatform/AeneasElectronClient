@@ -1,6 +1,6 @@
 <template>
     <div class="ae-enter-page h-100 mh-100">
-       <div class="gradient"> 
+       <div class="gradient">
         <div class="container fill">
             <div class="row">
                 <div class="col text-center">
@@ -9,7 +9,7 @@
             </div>
             <div class="row client-title">
                 <div class="col-sm-12 text-center">
-                    <translate>Client</translate> 0.0.0.1
+                    <translate>Testnet Build. Client</translate> 1.0.2
                 </div>
             </div>
             <div class="row motto-title">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-       </div>  
+       </div>
     </div>
 </template>
 <script>
@@ -82,5 +82,5 @@ export default {
     }
   }
 }
-</script>
 
+</script>

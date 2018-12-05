@@ -8,34 +8,34 @@
                             <translate>Your address: </translate>
                         </span>
                         <span>{{seed.address}}</span>
-                        <div class="copy-btn-text">&nbsp;</div>    
+                        <div class="copy-btn-text">&nbsp;</div>
                     </div>
                     <div>
                         <span class="card-subtitle mb-2 text-muted">
                             <translate>Encoded Seed: </translate>
                         </span>
                         <span>{{seed.seed}}</span>
-                        <div class="copy-btn-text">&nbsp;</div>    
+                        <div class="copy-btn-text">&nbsp;</div>
                     </div>
                     <div>
                         <span class="card-subtitle mb-2 text-muted">
                             <translate>Available balance: </translate>
                         </span>
-                        <span>{{balance}}</span> ASH
+                        <span>{{balance.toLocaleString()}}</span> ASH
                         <span class="card-subtitle mb-2 text-muted" style="margin-left : 20px">
                             <translate>Unconfirmed: </translate>
                         </span>
-                        <span>{{unconfirmedBalance}}</span> ASH
+                        <span>{{unconfirmedBalance.toLocaleString()}}</span> ASH
                     </div>
                     <div>
                         <span class="card-subtitle mb-2 text-muted">
                             <translate>Total balance: </translate>
                         </span>
-                        <span>{{balance+unconfirmedBalance}}</span> ASH
+                        <span>{{fullBalance.toLocaleString()}}</span> ASH
                     </div>
-                    
+
                 </div>
-            </div>            
+            </div>
         </div>
         <div class="col-md-12 col-lg-3">
             <div class="card" >
@@ -49,7 +49,7 @@
                         <span class="card-subtitle mb-2 text-muted">
                             <translate>Height: </translate>
                         </span>
-                        <span>{{height}}</span> 
+                        <span>{{height}}</span>
                     </div>
                     <div>
                         <span class="card-subtitle mb-2 text-muted" @click="switchToMine">
@@ -57,11 +57,13 @@
                         </span>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 </template>
 <script>
+import {BigNumber} from 'bignumber.js'
+
 export default {
   name: 'DashBoard',
   methods: {
@@ -72,15 +74,12 @@ export default {
   computed: {
     seed () { return this.$store.state.main.seed },
     height () { return this.$store.state.main.height },
-    logged () {
-      return this.$store.state.main.logged
-    },
-    exp () { return this.$store.state.main.exp },
-    balance () { return this.$store.state.main.balance / this.exp },
-    unconfirmedBalance () { return this.$store.state.main.unconfirmedBalance / this.exp }
+    logged () { return this.$store.state.main.logged },
+    balance () { return this.$store.state.main.balance },
+    unconfirmedBalance () { return this.$store.state.main.unconfirmedBalance },
+    fullBalance () { return this.$store.state.main.fullBalance }
   },
   created: function () {
-    console.log('SEED')
     console.log(this.$store.state.main.seed)
   }
 }

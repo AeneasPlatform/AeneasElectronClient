@@ -5,7 +5,7 @@
                     <div class="col">
                         <a class="copy-btn" v-clipboard:copy="passPhraseCopy" v-clipboard:success="copySucess" v-clipboard:error="copyError">
                             <span></span>
-                        </a> 
+                        </a>
                         <div class="block-selection" style="display:inline-block;margin:0 10px;" v-bind:key="word" v-for="word in passPhrase">
                             <h5>
                                 <span class="badge badge-grey badge-light">
@@ -25,7 +25,7 @@
                         <b-button type="button" variant="default" @click="cancel" class="btn btn-outline-light ae-border"><translate>CANCEL</translate></b-button>
                     </div>
                 </div>
-            </div>            
+            </div>
   	  </div>
 </template>
 <script>
@@ -89,8 +89,8 @@ export default {
 }
 
 function fallbackMessage (action) {
-  var actionMsg = ''
-  var actionKey = (action === 'cut' ? 'X' : 'C')
+  let actionMsg = ''
+  let actionKey = (action === 'cut' ? 'X' : 'C')
 
   if (/iPhone|iPad/i.test(navigator.userAgent)) {
     actionMsg = 'No support :('
