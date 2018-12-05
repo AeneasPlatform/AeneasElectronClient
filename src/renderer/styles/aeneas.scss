@@ -1,6 +1,6 @@
 
 $ae-bg-color: #0c0b21;
-$ae-bg-img: url(assets/Noise_bg.png);
+$ae-bg-img: url(assets/imgs/Noise_bg.png);
 $ae-signin-color: #dedee1;
 $lato-web: "LatoWeb";
 $font-family-base: $lato-web;
@@ -35,9 +35,8 @@ h1.logotype {
     margin : 0 auto;
     padding : 0;
     background-color: #fff;
-    //background : url(assets/logo.svg) no-repeat 0 0/cover;
-    mask: url(assets/logo.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/logo.svg);
+    //background : url(assets/imgs/logo.svg) no-repeat 0 0/cover;
+    mask: url(assets/imgs/logo.svg) no-repeat 0 0/cover;
 
 }
 @media (max-width:715px) {
@@ -45,11 +44,11 @@ h1.logotype {
         padding-top: 10px;
     }
 }
- 
+
 h1.logotype a {
 	display : block;
 	height : 175px;
-	text-indent : -9999px; 
+	text-indent : -9999px;
 }
 
 .client-title {
@@ -84,9 +83,8 @@ div.logo {
     margin : 0 auto;
     padding : 0;
     background-color: #fff;
-    //background : url(assets/logo.svg) no-repeat 0 0/cover;
-    mask: url(assets/horizontal_logo.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/horizontal_logo.svg);
+    //background : url(assets/imgs/logo.svg) no-repeat 0 0/cover;
+    mask: url(assets/imgs/horizontal_logo.svg) no-repeat 0 0/cover;
 }
 
 nav .user_icon,nav .logout_icon, nav .icon_db, .icon_envelope {
@@ -98,15 +96,13 @@ nav .user_icon,nav .logout_icon, nav .icon_db, .icon_envelope {
 }
 
 nav .user_icon{
-    mask: url(assets/icon_User.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_User.svg);
+    mask: url(assets/imgs/icon_User.svg) no-repeat 0 0/cover;
     width: 24px;
     height: 22px;
 }
 
 .icon_envelope{
-    mask: url(assets/icon_Envelope.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Envelope.svg);
+    mask: url(assets/imgs/icon_Envelope.svg) no-repeat 0 0/cover;
     width: 25px;
     height: 16px;
     background-color: #212529;
@@ -119,14 +115,12 @@ nav .user_icon:hover,nav .logout_icon:hover,nav .send_icon:hover::before, nav .i
 
 nav .logout_icon{
     width: 15.4pt;
-    mask: url(assets/icon_Logout.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Logout.svg);
+    mask: url(assets/imgs/icon_Logout.svg) no-repeat 0 0/cover;
 }
 
 nav .icon_db{
     width: 21.5pt;
-    mask: url(assets/icon_Dashboard.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Dashboard.svg);
+    mask: url(assets/imgs/icon_Dashboard.svg) no-repeat 0 0/cover;
 }
 
 nav .send_icon{
@@ -144,8 +138,7 @@ nav .send_icon::before{
     width: 23px;
     height: 22px;
     display: inline-block;
-    mask: url(assets/icon_Send.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Send.svg);
+    mask: url(assets/imgs/icon_Send.svg) no-repeat 0 0/cover;
 }
 
 .badge {
@@ -158,15 +151,15 @@ nav .send_icon::before{
 
 .badge-light { color:  #eee!important }
 
-.badge-grey,.panel-grey { 
+.badge-grey,.panel-grey {
     background-color: rgba(160, 160, 160, 0.5)!important ,
 }
 
 .block-selection{
-    -webkit-user-select: none;  
-    -moz-user-select: none;  
-    -ms-user-select: none;  
-    -o-user-select: none;  
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
     user-select: none;
 }
 
@@ -184,7 +177,7 @@ nav .send_icon::before{
 
 .copy-btn span{
     background-color: #d1d5d8;
-    mask: url(assets/clippy.svg) no-repeat 0 0/cover;
+    mask: url(assets/imgs/clippy.svg) no-repeat 0 0/cover;
     background-size: contain;
     cursor: pointer;
     display: inline-block;
@@ -203,10 +196,10 @@ nav .send_icon::before{
 }
 
 .alert-fixed {
-    position:fixed; 
-    top: 5px; 
-    right: 5px; 
-    z-index:9999; 
+    position:fixed;
+    top: 5px;
+    right: 5px;
+    z-index:9999;
 }
 
 input.ae-text {
@@ -222,8 +215,7 @@ div.ae-glyph {
     padding : 0;
     display:inline-block;
     background-color: #878691;
-    mask: url(assets/icon_Meandr.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/icon_Meandr.svg);    
+    mask: url(assets/imgs/icon_Meandr.svg) no-repeat 0 0/cover;
 }
 
 div.copy-btn-text {
@@ -235,8 +227,7 @@ div.copy-btn-text {
     padding : 0;
     display:inline-block;
     background-color: #000;
-    mask: url(assets/clippy.svg) no-repeat 0 0/cover;
-    -webkit-mask-image: url(assets/clippy.svg);    
+    mask: url(assets/imgs/clippy.svg) no-repeat 0 0/cover;
 }
 
 div.copy-btn-text:hover {
@@ -245,11 +236,15 @@ div.copy-btn-text:hover {
 }
 
 div.seed {
-   cursor: pointer; 
+   cursor: pointer;
 }
 
 div.seed:hover {
     color:$ae-signin-color;
+}
+
+.card-block {
+    overflow: scroll;
 }
 
 .blocks {
@@ -307,8 +302,8 @@ div.ae-dropdown button:hover, .show .dropdown-toggle{
 }
 
 .loader {
-    border: 16px solid #f3f3f3; 
-    border-top: 16px solid #3498db; 
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
     border-radius: 50%;
     width: 120px;
     height: 120px;

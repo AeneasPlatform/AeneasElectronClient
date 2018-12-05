@@ -81,34 +81,7 @@ export default {
     seed () { return this.$store.state.main.seed },
     logged () { return this.$store.state.main.logged },
     exp () { return new BigNumber(10).pow(8) },
-
-    methods: {
-      onSubmit: function () {
-        let sendAsh = {msg: {action: 'SendAsh',
-          address: this.form.toAddress,
-          fee: 0,
-          amount: BigNumber(this.form.amountToSend).multipliedBy(this.exp).toString(),
-          from: this.seed.address
-        }}
-      // this.$store.commit ("seed", this.seed)
-      }
-    },
-    computed: {
-      balance () { return this.$store.state.main.balance },
-      unconfirmedBalance () { return this.$store.state.main.unconfirmedBalance },
-      seed () { return this.$store.state.main.seed },
-      logged () { return this.$store.state.main.logged },
-      exp () { return new BigNumber(10).pow(8) },
-      toAddress () {
-        return this.$gettext('To address')
-      },
-      amountToSend () {
-        return this.$gettext('Amount to Send')
-      },
-      fee () {
-        return this.$gettext('Fee')
-      }
-    },
+    
     toAddress () {
       return this.$gettext('To address')
     },
