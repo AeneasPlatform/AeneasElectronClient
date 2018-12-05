@@ -36,6 +36,7 @@
 
 export default {
   name: 'RecentBlocks',
+
   methods: {
     timeConverter: function (UNIX_timestamp) {
       var a = new Date(UNIX_timestamp)
@@ -47,12 +48,10 @@ export default {
       var sec = a.getSeconds()
       var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec
       return time
-    }
+    },
   },
   computed: {
-    blocks () {
-      return this.$store.state.main.blocks
-    }
+    blocks () { return this.$store.state.main.blocks },
   }
 }
 </script>

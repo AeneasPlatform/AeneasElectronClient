@@ -6,6 +6,7 @@ $lato-web: "LatoWeb";
 $font-family-base: $lato-web;
 body{
     font-family: $lato-web;
+    --padding-distance: 8rem;
 }
 
 .ae-enter-page {
@@ -15,7 +16,7 @@ body{
 }
 
 .ae-enter-page .gradient .container{
-    padding-top: 100px;
+    padding-top: var(--padding-distance);
 }
 
 .gradient {
@@ -34,10 +35,7 @@ h1.logotype {
 	height : 135px;
     margin : 0 auto;
     padding : 0;
-    background-color: #fff;
-    //background : url(assets/imgs/logo.svg) no-repeat 0 0/cover;
-    mask: url(assets/imgs/logo.svg) no-repeat 0 0/cover;
-
+    background : url(../renderer/assets/imgs/logo.svg) no-repeat 0 0/cover;
 }
 @media (max-width:715px) {
     .ae-enter-page  {
@@ -82,9 +80,7 @@ div.logo {
 	height : 30px;
     margin : 0 auto;
     padding : 0;
-    background-color: #fff;
-    //background : url(assets/imgs/logo.svg) no-repeat 0 0/cover;
-    mask: url(assets/imgs/horizontal_logo.svg) no-repeat 0 0/cover;
+    background : url(../renderer/assets/imgs/horizontal_logo.svg) no-repeat 0 0/cover;
 }
 
 nav .user_icon,nav .logout_icon, nav .icon_db, .icon_envelope {
@@ -92,35 +88,36 @@ nav .user_icon,nav .logout_icon, nav .icon_db, .icon_envelope {
     display: block;
     width: 20px;
     height: 22px;
-    background-color: #fff;
+}
+.icon_db {
+    background: white;
 }
 
 nav .user_icon{
-    mask: url(assets/imgs/icon_User.svg) no-repeat 0 0/cover;
     width: 24px;
     height: 22px;
+    background: url(../renderer/assets/imgs/icon_User.svg) no-repeat 0 0/cover;
 }
 
 .icon_envelope{
-    mask: url(assets/imgs/icon_Envelope.svg) no-repeat 0 0/cover;
     width: 25px;
     height: 16px;
-    background-color: #212529;
     margin-bottom: 2px;
+    background: url(../renderer/assets/imgs/icon_Envelope.svg) no-repeat 0 0/cover;
 }
 
 nav .user_icon:hover,nav .logout_icon:hover,nav .send_icon:hover::before, nav .icon_db:hover{
-    background-color: #d1d5d8;
+    background-color: #4e4c27;
 }
 
 nav .logout_icon{
     width: 15.4pt;
-    mask: url(assets/imgs/icon_Logout.svg) no-repeat 0 0/cover;
+    background: url(../renderer/assets/imgs/icon_Logout.svg) no-repeat 0 0/cover;
 }
 
 nav .icon_db{
     width: 21.5pt;
-    mask: url(assets/imgs/icon_Dashboard.svg) no-repeat 0 0/cover;
+    background: url(../renderer/assets/imgs/icon_Dashboard.svg) no-repeat 0 0/cover;
 }
 
 nav .send_icon{
@@ -130,7 +127,6 @@ nav .send_icon{
 nav .send_icon::before{
     content: " ";
     margin: 0 4px;
-    background-color: #fff;
     position: absolute;
     top: 50%;
     margin-top: calc(-23px/2);
@@ -138,7 +134,7 @@ nav .send_icon::before{
     width: 23px;
     height: 22px;
     display: inline-block;
-    mask: url(assets/imgs/icon_Send.svg) no-repeat 0 0/cover;
+    background: url(../renderer/assets/imgs/icon_Send.svg) no-repeat 0 0/cover;
 }
 
 .badge {
@@ -176,14 +172,13 @@ nav .send_icon::before{
 }
 
 .copy-btn span{
-    background-color: #d1d5d8;
-    mask: url(assets/imgs/clippy.svg) no-repeat 0 0/cover;
     background-size: contain;
     cursor: pointer;
     display: inline-block;
     height: 31px;
     width: 25px;
     margin: 0 5px;
+    background: url(../renderer/assets/imgs/clippy.svg) no-repeat 0 0/cover;
 }
 
 .copy-btn:hover span{
@@ -214,8 +209,7 @@ div.ae-glyph {
     margin : 0 auto;
     padding : 0;
     display:inline-block;
-    background-color: #878691;
-    mask: url(assets/imgs/icon_Meandr.svg) no-repeat 0 0/cover;
+    background: url(../renderer/assets/imgs/icon_Meandr.svg) no-repeat 0 0/cover;
 }
 
 div.copy-btn-text {
@@ -226,13 +220,12 @@ div.copy-btn-text {
     margin : 0 auto;
     padding : 0;
     display:inline-block;
-    background-color: #000;
-    mask: url(assets/imgs/clippy.svg) no-repeat 0 0/cover;
+    background: url(../renderer/assets/imgs/clippy.svg) no-repeat 0 0/cover;
 }
 
 div.copy-btn-text:hover {
     cursor: pointer;
-    background-color: #111111;
+    background-color: #ffffff;
 }
 
 div.seed {
