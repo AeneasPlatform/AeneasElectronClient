@@ -30,7 +30,7 @@
                   <b-form-group id="feegroup"
                     :label="fee"
                     label-for="fee"
-                    v-show="false">
+                    v-show="true">
                     <b-form-input class="ae-text ae-ash-border" id="fee"
                         type="text"
                         :value="form.fee"
@@ -57,21 +57,27 @@ export default {
       form: {
         address: '',
         amount: '',
-        fee: ''
+        fee: '0.001'
       }
-
     }
   },
   methods: {
+    // returns boolean
+    // formValidate: function(msg) {
+    //   return !(!msg.address.includes("Æ") || parseFloat(msg.fee) < 0.001);
+    // },
+
     onSubmit: function () {
       let sendAsh = {msg: {action: 'SendAsh',
         address: this.form.address,
-        fee: 0,
+        fee: BigNumber(this.form.fee).multipliedBy(this.exp).toString(),
         amount: BigNumber(this.form.amount).multipliedBy(this.exp).toString(),
         from: this.seed.address}
       }
       console.log(sendAsh)
-      this.$socket.sendObj(sendAsh)
+      // if (this.formValidate(sendAsh))
+       this.$socket.sendObj(sendAsh)
+
       // this.$store.commit ("seed", this.seed)
     }
   },
@@ -81,7 +87,7 @@ export default {
     seed () { return this.$store.state.main.seed },
     logged () { return this.$store.state.main.logged },
     exp () { return new BigNumber(10).pow(8) },
-    
+
     toAddress () {
       return this.$gettext('To address')
     },
