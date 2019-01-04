@@ -32,15 +32,14 @@ let moduleMainStore = {
       state.height = h
     },
     balance (state, b) {
-      let newBalance = new BigNumber(b).dividedBy(state.exp)
+      let newBalance = new BigNumber(b)
       state.balance = newBalance
     },
     unconfirmedBalance (state, b) {
       state.unconfirmedBalance = new BigNumber(b).dividedBy(state.exp)
     },
-
     fullBalance (state, b) {
-      let newBalance = new BigNumber(b).dividedBy(state.exp)
+      let newBalance = new BigNumber(b)
       state.fullBalance = newBalance
     },
     transactions (state, transactions) {
@@ -79,13 +78,13 @@ let moduleMainStore = {
         return a.height > b.height ? -1 : (a.height < b.height ? 1 : 0)
       }).reverse()
     },
-    mergeTransactions (state, transactions) {
-      console.log('merging transactions')
-      // TODO: cut recent transactions to 50 items. (flystyle)
-      state.transactions = merge(state.transactions, transactions, 'id').sort((a, b) => {
-        return a.timestamp > b.timestamp ? -1 : (a.timestamp < b.timestamp ? 1 : 0)
-      }).reverse()
-    }
+    // mergeTransactions (state, transactions) {
+    //   console.log('merging transactions')
+    //   // TODO: cut recent transactions to 50 items. (flystyle)
+    //   state.transactions = merge(state.transactions, transactions, 'id').sort((a, b) => {
+    //     return a.timestamp > b.timestamp ? -1 : (a.timestamp < b.timestamp ? 1 : 0)
+    //   }).reverse()
+    // }
   }
 }
 
@@ -210,11 +209,11 @@ const store = new Vuex.Store({
       context.commit('allSeeds', message.seeds)
       context.commit('height', message.height)
       context.commit('balance', message.balance.available)
-      context.commit('fullBalance', message.balance.total)
+      context.commit('fullBalance', message.balance.available + message.balance.unconfirmed)
       context.commit('unconfirmedBalance', message.balance.unconfirmed)
       context.commit('mergeBlocks', message.lastBlocks)
-      const txs = processTransactions(context, message.lastBlocks)
-      context.commit('mergeTransactions', txs)
+      // const txs = processTransactions(context, message.lastBlocks)
+      // context.commit('mergeTransactions', txs)
       if (message.loggedIn === false && context.state.step === 4) {
         console.log('logout')
         context.commit('logout')
@@ -232,24 +231,6 @@ function merge (a, b, prop) {
     })
   })
   return reduced.concat(b)
-}
-
-function processTransactions (context, blocksArr) {
-  const transactions = []
-  const blockTransactions = blocksArr.reduce((acc, block) => {
-    block.transactions.forEach(tx => acc.push(JSON.parse(tx)))
-    return acc
-  }, [])
-
-  for (let seed in context.allSeeds) {
-    transactions.push(blockTransactions.filter(tx => 'Æx' + tx.from[0].proposition == seed.address))
-  }
-
-  for (let i = 0; i < transactions.length; ++i) {
-    transactions[i].amount = transactions[i].from[0].nonce
-    transactions[i].account = transactions[i].from[0].proposition
-  }
-  return transactions
 }
 
 store.subscribe((mutation, state) => {
