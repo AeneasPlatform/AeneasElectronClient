@@ -21,7 +21,7 @@
                         <span class="card-subtitle mb-2 text-muted">
                             <translate>Available balance: </translate>
                         </span>
-                        <span>{{balance.toLocaleString()}}</span> ASH
+                        <span>{{numberWithDots(balance)}}</span> ASH
                         <span class="card-subtitle mb-2 text-muted" style="margin-left : 20px">
                             <translate>Unconfirmed: </translate>
                         </span>
@@ -31,7 +31,7 @@
                         <span class="card-subtitle mb-2 text-muted">
                             <translate>Total balance: </translate>
                         </span>
-                        <span>{{fullBalance.toLocaleString()}}</span> ASH
+                        <span>{{numberWithDots(fullBalance)}}</span> ASH
                     </div>
 
                 </div>
@@ -64,12 +64,12 @@
 <script>
 import {BigNumber} from 'bignumber.js'
 
+
 export default {
   name: 'DashBoard',
   methods: {
-    switchToMine: function () {
-      this.$socket.sendObj({msg: {action: 'SwitchToMine'}})
-    }
+    switchToMine: function () { this.$socket.sendObj({ msg: { action: 'SwitchToMine'}}) },
+    numberWithDots(grans) {return grans.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ")}
   },
   computed: {
     seed () { return this.$store.state.main.seed },
