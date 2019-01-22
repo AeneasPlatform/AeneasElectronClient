@@ -4,11 +4,11 @@
     <div class="container fill">
         <WalletInfo></WalletInfo>
         <b-tabs style="margin-top:20px" v-show="!showSendAsh">
-            <b-tab title="transactions" active>
-                <RecentTransactions></RecentTransactions>
-            </b-tab>
-            <b-tab title="blocks">
+            <b-tab title="blocks" active>
                 <RecentBlocks></RecentBlocks>
+            </b-tab>
+            <b-tab title="transactions">
+                <RecentTransactions></RecentTransactions>
             </b-tab>
         </b-tabs>
         <SendAshForm v-show="showSendAsh"></SendAshForm>
