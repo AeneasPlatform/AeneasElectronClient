@@ -10,6 +10,9 @@
                     <b-button type="button" variant="default" @click="loadBalances" class="btn btn-outline-dark ae-border">
                         <translate>LOAD BALANCES</translate>
                     </b-button>
+                    <b-button type="button" variant="default" @click="save" class="btn btn-outline-dark ae-border">
+                        <translate>SAVE TO FILE</translate>
+                    </b-button>
                 </div>
                 <div class="card-block blocks">
                     <b-form-input class="ae-text ae-ash-border" id="search"
@@ -41,6 +44,24 @@
 </template>
 <script>
 
+function convertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if (line != '') line += ','
+
+            line += array[i][index];
+        }
+
+        str += line + '\r\n';
+    }
+
+    return str;
+}
+
 export default {
   name: 'RecentBalances',
   data: function (){ return {
@@ -59,6 +80,23 @@ export default {
             this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
         }
         this.currentSort = s;
+    },
+    save: function() {
+        let filename = "balances.csv"
+        let data = convertToCSV(JSON.stringify (this.balances.map ((obj) => {
+            return {
+                addr :obj.addr,
+                balance :obj.balance.available,
+                blocksCount: obj.blocksCount
+            }
+        })))
+        var blob = new Blob([data], {type: 'text/csv'});
+        var elem = window.document.createElement('a');
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = filename;        
+        document.body.appendChild(elem);
+        elem.click();        
+        document.body.removeChild(elem);
     }
   },
   computed: {
