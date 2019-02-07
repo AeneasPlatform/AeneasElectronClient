@@ -69,7 +69,13 @@ export default {
   name: 'DashBoard',
   methods: {
     switchToMine: function () { this.$socket.sendObj({ msg: { action: 'SwitchToMine'}}) },
-    numberWithDots(grans) {return grans.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ")}
+    numberWithDots(grans) {
+      let str = grans.toString().replace(/(?=([0-9+\ ]{8})(?=[.]|$))/g, ' . ');
+      let dot = str.indexOf('.', 0);
+      let str1 = str.substring(0, dot-1).replace(' ', '');
+      let str2 = str.substring(dot-1, str.length).replace(/\B(?=(\d{4})+(?!\d))/g, ' ');
+      return str1 + str2;
+    }
   },
   computed: {
     seed () { return this.$store.state.main.seed },

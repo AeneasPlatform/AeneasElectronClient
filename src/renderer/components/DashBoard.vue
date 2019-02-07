@@ -4,13 +4,13 @@
     <div class="container fill">
         <WalletInfo></WalletInfo>
         <b-tabs style="margin-top:20px" v-show="!showSendAsh">
-            <b-tab title="transactions" active>
-                <RecentTransactions></RecentTransactions>
-            </b-tab>
-            <b-tab title="blocks">
+            <b-tab title="blocks" active>
                 <RecentBlocks></RecentBlocks>
             </b-tab>
-            <b-tab title="balances">
+            <b-tab title="transactions">
+                <RecentTransactions></RecentTransactions>
+            </b-tab>
+             <b-tab title="balances">
                 <RecentBalances></RecentBalances>
             </b-tab>
         </b-tabs>
@@ -31,9 +31,9 @@ export default {
   components: {
     'Navbar': Navbar,
     'WalletInfo': WalletInfo,
-    'RecentTransactions': RecentTransactions,
     'RecentBlocks': RecentBlocks,
     'RecentBalances': RecentBalances,
+    'RecentTransactions': RecentTransactions,
     'SendAshForm': SendAshForm
   },
   computed: {

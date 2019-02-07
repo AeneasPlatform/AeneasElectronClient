@@ -9,7 +9,7 @@
             </div>
             <div class="row client-title">
                 <div class="col-sm-12 text-center">
-                    <translate>Testnet Build. Client</translate> 1.0.2
+                    <translate>Aeneas Sanctum Client. Version</translate> 1.1
                 </div>
             </div>
             <div class="row motto-title">

@@ -1,6 +1,4 @@
-# electron-aeneasv2
-
-> An electron-vue project
+# Aeneas Sanctum Desktop Client
 
 #### Build Setup
 
@@ -8,7 +6,7 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:9080
+# run at localhost:9080
 npm run dev
 
 # build electron application for production
@@ -16,8 +14,3 @@ npm run build
 
 
 ```
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
-# AeneasElectronClient

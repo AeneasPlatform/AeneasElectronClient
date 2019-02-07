@@ -10,7 +10,11 @@
             </div>
             <div class="panel panel-grey">
               <div class="panel-body" style = "min-height:200px">
-                <button class="btn btn-sm btn-outline-light" @click="unconfirm(word)" style="margin:10px 10px;" v-bind:key="word" v-for="word in checkPassPhrase">
+                <button class="btn btn-sm btn-outline-light" 
+                        @click="unconfirm(word)" 
+                        style="margin:10px 10px;" 
+                        v-bind:key="word" 
+                        v-for="word in checkPassPhrase">
                   <span>{{word}}</span>
                 </button>
               </div>
@@ -21,7 +25,12 @@
       <div v-show="wordsShow" class="row justify-content-center">
         <div class="col" style = "min-height:200px">
           <span class="center-block">
-            <button v-show="canShow(word)" class="btn btn-sm btn-outline-light" @click="clicked(word)" style="margin:10px 10px;" v-bind:key="word" v-for="word in confirmationPassPhrase">
+            <button v-show="canShow(word)"
+                    @click="clicked(word)" 
+                    class="btn btn-sm btn-outline-light"
+                    style="margin:10px 10px;" 
+                    v-bind:key="word" 
+                    v-for="word in confirmationPassPhrase">
               <span>{{word}}</span>
                 </button>
           </span>
