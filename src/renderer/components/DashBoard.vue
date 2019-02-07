@@ -27,8 +27,8 @@ export default {
   components: {
     'Navbar': Navbar,
     'WalletInfo': WalletInfo,
-    'RecentTransactions': RecentTransactions,
     'RecentBlocks': RecentBlocks,
+    'RecentTransactions': RecentTransactions,
     'SendAshForm': SendAshForm
   },
   computed: {
