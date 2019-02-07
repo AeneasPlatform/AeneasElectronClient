@@ -22,6 +22,7 @@ let moduleMainStore = {
     showSendAsh: false,
     seed: {}, // TODO add private key for sending messages
     blocks: [],
+    balances : [],
     transactions: []
   },
   mutations: {
@@ -71,6 +72,10 @@ let moduleMainStore = {
       b.unshift(obj)
       if (b.length > 20) b.pop()
       state.blocks = b
+    },
+    setBalances(state, arrBalance){
+      state.balances = arrBalance
+      console.log ([state.balances, arrBalance])
     },
     mergeBlocks (state, blocks) {
       console.log('merging blocks')
@@ -202,6 +207,10 @@ const store = new Vuex.Store({
       context.commit('login')
       context.commit('clearmined')
       console.log(context)
+    },
+    Balances (context, message){
+      console.log (['WOW balances', message.balances])
+      context.commit('setBalances', message.balances)
     },
     SavedSeeds (context, message) {
       console.log('WOW SavedSeeds')
