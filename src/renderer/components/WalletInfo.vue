@@ -70,7 +70,11 @@ export default {
   methods: {
     switchToMine: function () { this.$socket.sendObj({ msg: { action: 'SwitchToMine'}}) },
     numberWithDots(grans) {
-      return grans.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ").replace("(?=([0-9+/ ]{9})(?=[.]|$))", ".")
+      let str = grans.toString().replace(/(?=([0-9+\ ]{8})(?=[.]|$))/g, ' . ');
+      let dot = str.indexOf('.', 0);
+      let str1 = str.substring(0, dot-1).replace(' ', '');
+      let str2 = str.substring(dot-1, str.length).replace(/\B(?=(\d{4})+(?!\d))/g, ' ');
+      return str1 + str2;
     }
   },
   computed: {
