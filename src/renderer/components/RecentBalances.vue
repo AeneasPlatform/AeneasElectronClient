@@ -10,7 +10,12 @@
                     <b-button type="button" variant="default" @click="loadBalances" class="btn btn-outline-dark ae-border">
                         <translate>LOAD BALANCES</translate>
                     </b-button>
-                    {{balances}}
+                </div>
+                <div class="card-block blocks">
+                    <b-form-input class="ae-text ae-ash-border" id="search"
+                        type="text"
+                        v-model="search"
+                        placeholder="Search.."></b-form-input>
                 </div>
                 <div class="card-block blocks horscroll">
                     <table class="table blocksfont">
@@ -22,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-bind:key="b.addr" v-for="b in balances">
+                            <tr v-bind:key="b.addr" v-for="b in filteredList">
                                 <td>{{b.addr}}</td>
                                 <td>{{b.balance.available}}</td>
                                 <td>{{b.blocksCount}}</td>
@@ -40,7 +45,8 @@ export default {
   name: 'RecentBalances',
   data: function (){ return {
         currentSort:'name',
-        currentSortDir:'asc'
+        currentSortDir:'asc',
+        search: '',
     }
   },  
   methods: {
@@ -67,6 +73,11 @@ export default {
             return 0;
          }); 
         }else return []
+    },
+    filteredList() {
+      return this.balances.filter(b => {
+        return b.addr.toLowerCase().includes(this.search.toLowerCase())
+      })
     },
   }
 }
