@@ -27,6 +27,8 @@
                                 <th @click="sort('addr')" scope="col"><translate>Addres</translate></th>
                                 <th scope="col"><translate>Balance</translate></th>
                                 <th @click="sort('blocksCount')" scope="col"><translate>Blocks count</translate></th>
+                                <th scope="col"><translate>In. Tx. count</translate></th>
+                                <th scope="col"><translate>Out. Tx. count</translate></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +36,8 @@
                                 <td>{{b.addr}}</td>
                                 <td>{{b.balance.available}}</td>
                                 <td>{{b.blocksCount}}</td>
+                                <td>{{b.txsInCount}}</td>
+                                <td>{{b.txsOutCount}}</td>
                             </tr>
                         </tbody>
                     </table>
