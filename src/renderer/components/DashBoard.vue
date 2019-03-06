@@ -10,6 +10,9 @@
             <b-tab title="transactions">
                 <RecentTransactions></RecentTransactions>
             </b-tab>
+             <b-tab title="balances">
+                <RecentBalances></RecentBalances>
+            </b-tab>
         </b-tabs>
         <SendAshForm v-show="showSendAsh"></SendAshForm>
     </div>
@@ -20,6 +23,7 @@ import Navbar from '@/components/Navbar'
 import WalletInfo from '@/components/WalletInfo'
 import RecentTransactions from '@/components/RecentTransactions'
 import RecentBlocks from '@/components/RecentBlocks'
+import RecentBalances from '@/components/RecentBalances'
 import SendAshForm from '@/components/SendAshForm'
 
 export default {
@@ -28,6 +32,7 @@ export default {
     'Navbar': Navbar,
     'WalletInfo': WalletInfo,
     'RecentBlocks': RecentBlocks,
+    'RecentBalances': RecentBalances,
     'RecentTransactions': RecentTransactions,
     'SendAshForm': SendAshForm
   },

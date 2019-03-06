@@ -22,6 +22,7 @@ let moduleMainStore = {
     showSendAsh: false,
     seed: {}, // TODO add private key for sending messages
     blocks: [],
+    balances : [],
     transactions: []
   },
   mutations: {
@@ -71,6 +72,10 @@ let moduleMainStore = {
       b.unshift(obj)
       if (b.length > 20) b.pop()
       state.blocks = b
+    },
+    setBalances(state, arrBalance){
+      state.balances = arrBalance
+      console.log ([state.balances, arrBalance])
     },
     mergeBlocks (state, blocks) {
       console.log('merging blocks')
@@ -153,6 +158,9 @@ const store = new Vuex.Store({
       state.socket.isConnected = false
       console.log(['state.socket.isConnected', state.socket.isConnected])
     },
+    SOCKET_RECONNECT(state, count) {
+      console.info(state, count)
+    },
     SOCKET_ONERROR (state, event) {
       console.error(state, event)
       console.log(['state.socket.isConnected', state.socket.isConnected])
@@ -203,9 +211,18 @@ const store = new Vuex.Store({
       context.commit('clearmined')
       console.log(context)
     },
+    Balances (context, message){
+      console.log (['WOW balances', message.balances])
+      context.commit('setBalances', message.balances)
+    },
+    ReturnSeedWithAddress (context, message){
+    },
+    ReturnPowBlock (context, message){
+      console.log (['ReturnPowBlock', message])
+      context.commit("addmined", message)
+    },
     SavedSeeds (context, message) {
       console.log('WOW SavedSeeds')
-      console.log(message)
       context.commit('allSeeds', message.seeds)
       context.commit('height', message.height)
       context.commit('balance', message.balance.available)
@@ -214,7 +231,7 @@ const store = new Vuex.Store({
       context.commit('mergeBlocks', message.lastBlocks)
       // const txs = processTransactions(context, message.lastBlocks)
       // context.commit('mergeTransactions', txs)
-      if (message.loggedIn === false && context.state.step === 4) {
+      if (message.loggedIn === false && context.getters.getStep === 4) {
         console.log('logout')
         context.commit('logout')
         context.commit('step', 0)
