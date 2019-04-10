@@ -17,13 +17,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-bind:key="block.id" v-for="block in blocks" @click="showIt(true)">
+                            <tr v-bind:key="block.id" v-for="block in blocks">
                                 <th>{{block.blockHeight}}</th>
-                                <th>{{block.id}}</th>
+                                <th @click="showIt(true)">{{block.id}}</th>
                                 <td>{{timeConverter(block.timestamp)}}</td>
                                 <td>{{block.address}}</td>
                                 <td>{{block.nonce}}</td>
-                                <Modal v-if="showModal" @close="showIt(false)"></Modal>
+                                <Modal v-bind:txs="block.transactions" v-if="show" @click="showIt(false)" @close="showIt(false)"></Modal>
                             </tr>
                         </tbody>
                     </table>
@@ -57,19 +57,12 @@ export default {
       return time
     },
     showIt: function (value) {
-      this.show = !this.show;
+      this.show = value;
       console.log("NEW VALUE : " + this.show)
     }
   },
   computed: {
-    blocks () { return this.$store.state.main.blocks },
-    // showModal: {
-    //   get: function() { return this.showModalWindow; },
-    //   set: function(newValue) {
-    //     console.log("New value : " + newValue);
-    //     this.showModalWindow = newValue;
-    //   }
-    // } 
+    blocks () { return this.$store.state.main.blocks; } 
   }, 
   components: {
     'Modal': Modal

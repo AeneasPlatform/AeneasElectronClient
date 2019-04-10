@@ -12,7 +12,20 @@
 
           <div class="modal-body">
             <slot name="body">
-              default body
+              <table class="table blocksfont">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-bind:key="tx.id" v-for="tx in res">
+                    <th>{{tx.id}}</th>
+                    <th>{{tx.timestamp}}</th>
+                  </tr>t
+                </tbody>
+              </table>
             </slot>
           </div>
 
@@ -28,8 +41,24 @@
 </template>
 
 <script>
+  //  "timestamp":1553590789907, "id":"2C9br4qn55mGc4kYnoHuqicTA4oLrxCSqmrp6Gc5YkTR"
   export default {
-    name: 'Modal'
+    name: 'Modal',
+    props: ['txs'],
+    methods: {
+      parseTransactions() {
+        // int to string. TODO: parse it in deep.
+        res = JSON.parse(this.txs);
+        console.log(res);
+        return res;
+      }
+    },
+    computed: {
+      res() { 
+        console.log(JSON.parse(this.txs));
+        return this.parseTransactions(); 
+      }
+    }
   }
 </script>
 
