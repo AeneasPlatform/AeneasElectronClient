@@ -3,27 +3,25 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
           <div class="modal-body">
             <slot name="body">
+              <div class="block-id">{{blockId}}</div>
               <table class="table blocksfont">
                 <thead>
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Timestamp</th>
+                    <th class="modal-th" scope="col">ID</th>
+                    <th class="modal-th" scope="col">Destination</th>
+                    <th class="modal-th" scope="col">Amount</th>
+                    <th class="modal-th" scope="col">Timestamp</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-bind:key="tx.id" v-for="tx in res">
-                    <th>{{tx.id}}</th>
-                    <th>{{tx.timestamp}}</th>
-                  </tr>t
+                  <tr v-bind:key="tx.id" v-for="tx in transactions">
+                    <th class="modal-th">{{tx.id}}</th>
+                    <th class="modal-th">{{tx.address}}</th>
+                    <th class="modal-th">{{tx.amount}}</th>
+                    <th class="modal-th">{{tx.timestamp}}</th>
+                  </tr>
                 </tbody>
               </table>
             </slot>
@@ -41,22 +39,28 @@
 </template>
 
 <script>
+import { parse } from 'path';
   //  "timestamp":1553590789907, "id":"2C9br4qn55mGc4kYnoHuqicTA4oLrxCSqmrp6Gc5YkTR"
   export default {
     name: 'Modal',
-    props: ['txs'],
-    methods: {
-      parseTransactions() {
-        // int to string. TODO: parse it in deep.
-        res = JSON.parse(this.txs);
-        console.log(res);
-        return res;
+    props: ['transactions', 'blockId'],
+    data() {
+      return {
+        txs: this.transactions,
+        bId: this.blockId,
       }
     },
-    computed: {
-      res() { 
-        console.log(JSON.parse(this.txs));
-        return this.parseTransactions(); 
+    methods: {
+      timeConverter (UNIX_timestamp) {
+        const date = new Date(UNIX_timestamp)
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+        const _date = date.getDate()
+        const hour = date.getHours()
+        const min = date.getMinutes()
+        const sec = date.getSeconds()
+        const time = _date + '-' + month + '-' + year + ' ' + hour + ':' + min + ':' + sec
+        return time;
       }
     }
   }
@@ -72,7 +76,6 @@
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
   display: table;
-  opacity: .7;
 }
 
 .modal-wrapper {
@@ -81,14 +84,15 @@
 }
 
 .modal-container {
-  width: 300px;
+  width: 55%;
   margin: 0px auto;
-  padding: 20px 30px;
+  padding: 0px 30px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
+  transition: all .5s ease;
   font-family: Helvetica, Arial, sans-serif;
+  overflow: hidden;
 }
 
 .modal-header h3 {
@@ -100,8 +104,20 @@
   margin: 20px 0;
 }
 
+.modal-th {
+  text-align: center;
+  font-family: 'LatoWebBold';
+}
+
 .modal-default-button {
-  float: right;
+  float:initial;
+}
+
+.block-id {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: 'LatoWebBold';
+  font-size: 1.5rem;
 }
 </style>
 

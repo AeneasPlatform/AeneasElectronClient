@@ -9,7 +9,7 @@
             </div>
             <div class="row client-title">
                 <div class="col-sm-12 text-center">
-                    <translate>Client</translate> 1.1
+                    <translate>Client</translate> 1.2-dev
                 </div>
             </div>
             <div class="row motto-title">
