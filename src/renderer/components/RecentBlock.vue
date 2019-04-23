@@ -15,6 +15,7 @@
 
 <script>
 import Modal from '@/components/Modal'
+import { send } from 'q';
 export default {
   props: [ 'newBlock', 'showModal' ],
   data() {
@@ -24,28 +25,31 @@ export default {
     }
   },
   methods: {
-    timeConverter: function (UNIX_timestamp) {
-      var a = new Date(UNIX_timestamp)
-      var year = a.getFullYear()
-      var month = a.getMonth() + 1 < 10 ? '0' + (a.getMonth() + 1) : a.getMonth() + 1
-      var date = a.getDate()
-      var hour = a.getHours()
-      var min = a.getMinutes()
-      var sec = a.getSeconds()
-      var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec
-      return time
+    timeConverter (UNIX_timestamp) {
+      const date = new Date(UNIX_timestamp)
+      const year = date.getFullYear()
+      const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+      const _date = date.getDate()
+      const hour = date.getHours()
+      const min = date.getMinutes()
+      const sec = date.getSeconds()
+      const time = _date + '-' + month + '-' + year+ ' ' + hour + ':' + min + ':' + sec;
+      return time;
     },
     parse(blockTx) {
       const parsed = JSON.parse(blockTx);
       const amount = parsed.to[0].value;
       let address = parsed.to[0].proposition;
       let newId = parsed.id.toString();
-      address = address.substring(address.length - 6);
-      newId = newId.substring(newId.length - 7);
+      let sender = parsed.to[1];
+      if (sender == null || sender == undefined)
+        sender = "Network";
+      else sender = sender.proposition;
       return {
         id: newId, 
         address: address,
         amount: amount, 
+        sender: sender, 
         timestamp: this.timeConverter(parsed.timestamp)
       }
     },

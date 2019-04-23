@@ -1,35 +1,53 @@
 <template type="text/x-template" id="modal-template">
   <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <div class="modal-body">
+    <div class="tx-modal-mask">
+      <div class="tx-modal-wrapper">
+        <div class="tx-modal-container">
+          <div class="tx-modal-body">
             <slot name="body">
               <div class="block-id">{{blockId}}</div>
-              <table class="table blocksfont">
-                <thead>
-                  <tr>
-                    <th class="modal-th" scope="col">ID</th>
-                    <th class="modal-th" scope="col">Destination</th>
-                    <th class="modal-th" scope="col">Amount</th>
-                    <th class="modal-th" scope="col">Timestamp</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-bind:key="tx.id" v-for="tx in transactions">
-                    <th class="modal-th">{{tx.id}}</th>
-                    <th class="modal-th">{{tx.address}}</th>
-                    <th class="modal-th">{{tx.amount}}</th>
-                    <th class="modal-th">{{tx.timestamp}}</th>
-                  </tr>
-                </tbody>
-              </table>
+              <b-tabs style="margin-top:10px">
+                <b-tab title="general">
+                  <table class="table blocksfont">
+                    <thead>
+                      <tr>
+                        <th class="modal-th modal-th-header" scope="col">ID</th>
+                        <th class="modal-th modal-th-header" scope="col">Timestamp</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-bind:key="tx.id" v-for="tx in transactions">
+                        <th class="tx-modal-th">{{tx.id}}</th>
+                        <th class="tx-modal-th">{{tx.timestamp}}</th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </b-tab>
+                <b-tab title="transfer">
+                  <table class="table blocksfont">
+                    <thead>
+                      <tr>
+                        <th class="modal-th modal-th-header" scope="col">Sender</th>
+                        <th class="modal-th modal-th-header" scope="col">Destination</th>
+                        <th class="modal-th modal-th-header" scope="col">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-bind:key="tx.id" v-for="tx in transactions">
+                        <th class="modal-th">{{tx.sender}}</th>
+                        <th class="modal-th">{{tx.address}}</th>
+                        <th class="modal-th">{{numberWithDots(tx.amount)}}</th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </b-tab>
+              </b-tabs>
             </slot>
           </div>
 
           <div class="modal-footer">
             <button class="modal-default-button" @click="$emit('close')">
-              Close it!
+              CLOSE
             </button>
           </div>
         </div>
@@ -40,7 +58,6 @@
 
 <script>
 import { parse } from 'path';
-  //  "timestamp":1553590789907, "id":"2C9br4qn55mGc4kYnoHuqicTA4oLrxCSqmrp6Gc5YkTR"
   export default {
     name: 'Modal',
     props: ['transactions', 'blockId'],
@@ -51,23 +68,19 @@ import { parse } from 'path';
       }
     },
     methods: {
-      timeConverter (UNIX_timestamp) {
-        const date = new Date(UNIX_timestamp)
-        const year = date.getFullYear()
-        const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-        const _date = date.getDate()
-        const hour = date.getHours()
-        const min = date.getMinutes()
-        const sec = date.getSeconds()
-        const time = _date + '-' + month + '-' + year + ' ' + hour + ':' + min + ':' + sec
-        return time;
+      numberWithDots(grans) {
+        let str = grans.toString().replace(/(?=([0-9+\ ]{8})(?=[.]|$))/g, ' . ');
+        let dot = str.indexOf('.', 0);
+        let str1 = str.substring(0, dot-1).replace(' ', '');
+        let str2 = str.substring(dot-1, str.length).replace(/\B(?=(\d{4})+(?!\d))/g, ' ');
+        return str1 + str2;
       }
     }
   }
 </script>
 
 <style>
-  .modal-mask {
+.tx-modal-mask {
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -78,39 +91,62 @@ import { parse } from 'path';
   display: table;
 }
 
-.modal-wrapper {
+.tx-modal-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 
-.modal-container {
-  width: 55%;
-  margin: 0px auto;
-  padding: 0px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .5s ease;
-  font-family: Helvetica, Arial, sans-serif;
+.tx-modal-container {
   overflow: hidden;
+  width: 88%;
+  margin: 0px auto;
+  padding: 0px 2rem;
+  background-color: #fff;
+  border-radius: 4px;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0); */
+  transition: all .5s ease;
+  font-family: 'LatoWebMedium';
 }
 
-.modal-header h3 {
+.tx-modal-header h3 {
   margin-top: 0;
   color: #42b983;
 }
 
-.modal-body {
-  margin: 20px 0;
+.tx-modal-body {
+  margin-top: 10px;
+  padding-bottom: 1px;
 }
 
 .modal-th {
   text-align: center;
   font-family: 'LatoWebBold';
+  box-shadow: 0.5px 0.5px 2px 0.5px rgba(0,0,0,0.1);
+}
+
+.modal-th-header {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .modal-default-button {
-  float:initial;
+  float: initial;
+	border-radius: 1rem;
+	border: 1px solid gray;
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+}
+
+.modal-default-button:active {
+	position: relative;
+	top: 1px;
+}
+
+.tx-modal-footer {
+  border-top: 0;
+  justify-content: center;
 }
 
 .block-id {
