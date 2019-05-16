@@ -13,6 +13,9 @@
              <b-tab title="balances">
                 <RecentBalances></RecentBalances>
             </b-tab>
+             <b-tab title="wallet info">
+                <OwnWalletInfo></OwnWalletInfo>
+            </b-tab>
         </b-tabs>
         <SendAshForm v-show="showSendAsh"></SendAshForm>
     </div>
@@ -24,6 +27,7 @@ import WalletInfo from '@/components/WalletInfo'
 // import RecentTransactions from '@/components/RecentTransactions'
 import RecentBlocks from '@/components/RecentBlocks'
 import RecentBalances from '@/components/RecentBalances'
+import OwnWalletInfo from '@/components/OwnWalletInfo'
 import SendAshForm from '@/components/SendAshForm'
 
 export default {
@@ -33,6 +37,7 @@ export default {
     'WalletInfo': WalletInfo,
     'RecentBlocks': RecentBlocks,
     'RecentBalances': RecentBalances,
+    'OwnWalletInfo': OwnWalletInfo,
     // 'RecentTransactions': RecentTransactions,
     'SendAshForm': SendAshForm
   },
