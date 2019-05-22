@@ -4,6 +4,11 @@
       <div class="card" >
         <div class="card-header blocks-header">
           <translate>Recent blocks</translate>
+          <b-form-input class="ae-text ae-ash-border" id="blocksearch"
+              type="text"
+              v-model="search"
+              placeholder="Search.."></b-form-input>
+
         </div>
         <div class="card-block blocks horscroll">
           <table class="table blocksfont">
@@ -30,6 +35,10 @@ import RecentBlock from '@/components/RecentBlock'
 
 export default {
   name: 'RecentBlocks',
+  data: function (){ return {
+        search: '',
+    }
+  },  
   computed: {
     blocks () { return this.$store.state.main.blocks; } 
   },

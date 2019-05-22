@@ -16,6 +16,7 @@ let moduleMainStore = {
     exp: new BigNumber(10).pow(8),
     logged: false,
     height: 0,
+    peers:[],
     balance: 0,             // but BigNumber
     unconfirmedBalance: 0,  // but BigNumber
     fullBalance: 0,         // but BigNumber
@@ -31,6 +32,9 @@ let moduleMainStore = {
     },
     height (state, h) {
       state.height = h
+    },
+    peers (state, p) {
+      state.peers = p
     },
     balance (state, b) {
       let newBalance = new BigNumber(b)
@@ -229,6 +233,7 @@ const store = new Vuex.Store({
       context.commit('fullBalance', message.balance.available + message.balance.unconfirmed)
       context.commit('unconfirmedBalance', message.balance.unconfirmed)
       context.commit('mergeBlocks', message.lastBlocks)
+      context.commit('peers', message.peers)
       // const txs = processTransactions(context, message.lastBlocks)
       // context.commit('mergeTransactions', txs)
       if (message.loggedIn === false && context.getters.getStep === 4) {
