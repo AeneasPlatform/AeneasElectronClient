@@ -4,6 +4,7 @@
     <th @click="showIt(block, true)">{{block.id}}</th>
     <td>{{timeConverter(block.timestamp)}}</td>
     <td>{{block.address}}</td>
+    <td>{{block.transactions.length}}</td>
     <td>{{block.nonce}}</td>
     <Modal v-bind:blockId="block.id"
            v-bind:transactions="this.parseTransactions(block.transactions)" 
@@ -38,10 +39,11 @@ export default {
     },
     parse(blockTx) {
       const parsed = JSON.parse(blockTx);
-      const amount = parsed.to[0].value;
-      let address = parsed.to[0].proposition;
+      const to = parsed.to.filter(x => x.value > 0)[0];
+      const amount = to.value;
+      let address = to.proposition;
       let newId = parsed.id.toString();
-      let sender = parsed.to[1];
+      let sender = parsed.from[0];
       if (sender == null || sender == undefined)
         sender = "Network";
       else sender = sender.proposition;

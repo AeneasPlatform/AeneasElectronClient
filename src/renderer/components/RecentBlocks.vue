@@ -18,6 +18,7 @@
                   <th scope="col"><translate>ID</translate></th>
                   <th scope="col"><translate>Timestamp</translate></th>
                   <th scope="col"><translate>Generator</translate></th>
+                  <th scope="col"><translate>Txs count</translate></th>
                   <th scope="col"><translate>Nonce</translate></th>
               </tr>
             </thead>
