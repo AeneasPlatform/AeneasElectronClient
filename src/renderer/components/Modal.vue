@@ -6,6 +6,11 @@
           <div class="tx-modal-body">
             <slot name="body">
               <div class="block-id">{{blockId}}</div>
+              <div class="modal-footer">
+                <button class="modal-default-button" @click="$emit('close')">
+                  CLOSE
+                </button>
+              </div>
               <b-tabs style="margin-top:10px">
                 <b-tab title="general">
                   <table class="table blocksfont">
@@ -17,8 +22,8 @@
                     </thead>
                     <tbody>
                       <tr v-bind:key="tx.id" v-for="tx in transactions">
-                        <th class="tx-modal-th">{{tx.id}}</th>
-                        <th class="tx-modal-th">{{tx.timestamp}}</th>
+                        <th class="modal-th">{{tx.id}}</th>
+                        <th class="modal-th">{{tx.timestamp}}</th>
                       </tr>
                     </tbody>
                   </table>
@@ -97,7 +102,6 @@ import { parse } from 'path';
 }
 
 .tx-modal-container {
-  overflow: hidden;
   width: 88%;
   margin: 0px auto;
   padding: 0px 2rem;
@@ -118,8 +122,14 @@ import { parse } from 'path';
   padding-bottom: 1px;
 }
 
+.table {
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
 .modal-th {
   text-align: center;
+  font-size: 0.85rem;
   font-family: 'LatoWebBold';
   box-shadow: 0.5px 0.5px 2px 0.5px rgba(0,0,0,0.1);
 }

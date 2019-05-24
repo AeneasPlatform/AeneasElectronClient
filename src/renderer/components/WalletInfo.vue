@@ -86,7 +86,10 @@ export default {
   computed: {
     seed () { return this.$store.state.main.seed },
     height () { return this.$store.state.main.height },
-    peersCount  () { return this.$store.state.main.peers?this.$store.state.main.peers.length:0 },
+    peersCount  () { 
+      return this.$store.state.main.peers ? 
+             this.$store.state.main.peers.length : 0 
+    },
     logged () { return this.$store.state.main.logged },
     balance () { return this.$store.state.main.balance },
     unconfirmedBalance () { return this.$store.state.main.unconfirmedBalance },
