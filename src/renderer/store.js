@@ -16,6 +16,7 @@ let moduleMainStore = {
     exp: new BigNumber(10).pow(8),
     logged: false,
     height: 0,
+    peers:[],
     balance: 0,             // but BigNumber
     unconfirmedBalance: 0,  // but BigNumber
     fullBalance: 0,         // but BigNumber
@@ -31,6 +32,9 @@ let moduleMainStore = {
     },
     height (state, h) {
       state.height = h
+    },
+    peers (state, p) {
+      state.peers = p
     },
     balance (state, b) {
       let newBalance = new BigNumber(b)
@@ -229,14 +233,17 @@ const store = new Vuex.Store({
       context.commit('fullBalance', message.balance.available + message.balance.unconfirmed)
       context.commit('unconfirmedBalance', message.balance.unconfirmed)
       context.commit('mergeBlocks', message.lastBlocks)
-      // const txs = processTransactions(context, message.lastBlocks)
-      // context.commit('mergeTransactions', txs)
+      context.commit('peers', message.peers)
       if (message.loggedIn === false && context.getters.getStep === 4) {
         console.log('logout')
         context.commit('logout')
         context.commit('step', 0)
         location.reload()
       }
+    },
+    AddressBalance(context, message) {
+      console.log('User transactions incoming')
+      context.commit('transactions', processTransactions(message.balance))
     }
   }
 })
@@ -248,6 +255,22 @@ function merge (a, b, prop) {
     })
   })
   return reduced.concat(b)
+}
+
+function processTransactions(data) {
+  // data = JSON.parse(data)
+  const transactions = [];
+  console.log(data.txs[0]);
+  for(let tx = 0; tx < data.txs.length; ++tx) {
+    transactions.push({
+      id: data.txs[tx].txid, 
+      address: data.txs[tx].to,
+      amount: data.txs[tx].value, 
+      sender: data.addr, 
+      timestamp: data.txs[tx].fee
+    });
+  }
+  return transactions;
 }
 
 store.subscribe((mutation, state) => {

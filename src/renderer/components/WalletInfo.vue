@@ -56,6 +56,12 @@
                             <translate>Switch to mine</translate>
                         </span>
                     </div>
+                    <div>
+                        <span class="card-subtitle mb-2 text-muted">
+                            <translate>Active peers count: </translate>
+                        </span>
+                        <span>{{peersCount}}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,6 +86,10 @@ export default {
   computed: {
     seed () { return this.$store.state.main.seed },
     height () { return this.$store.state.main.height },
+    peersCount  () { 
+      return this.$store.state.main.peers ? 
+             this.$store.state.main.peers.length : 0 
+    },
     logged () { return this.$store.state.main.logged },
     balance () { return this.$store.state.main.balance },
     unconfirmedBalance () { return this.$store.state.main.unconfirmedBalance },
