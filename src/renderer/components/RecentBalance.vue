@@ -5,9 +5,9 @@
     <td>{{balance.blocksCount}}</td>
     <td>{{balance.txsInCount}}</td>
     <td>{{balance.txsOutCount}}</td>
-    <Modal v-bind:transactions="transactions"
+    <Modal v-bind:blockId="balance.addr"
+           v-bind:transactions="transactions"
            v-if="show" 
-           @dblclick="showIt(balance, false)"
            @close="showIt(balance, false)">
     </Modal>
   </tr>

@@ -6,11 +6,6 @@
           <div class="tx-modal-body">
             <slot name="body">
               <div class="block-id">{{blockId}}</div>
-              <div class="modal-footer">
-                <button class="modal-default-button" @click="$emit('close')">
-                  CLOSE
-                </button>
-              </div>
               <b-tabs style="margin-top:10px">
                 <b-tab title="general">
                   <table class="table blocksfont">
@@ -103,6 +98,7 @@ import { parse } from 'path';
 
 .tx-modal-container {
   width: 88%;
+  height: 70%;
   margin: 0px auto;
   padding: 0px 2rem;
   background-color: #fff;
@@ -110,6 +106,7 @@ import { parse } from 'path';
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0); */
   transition: all .5s ease;
   font-family: 'LatoWebMedium';
+  overflow: scroll;
 }
 
 .tx-modal-header h3 {
@@ -161,6 +158,7 @@ import { parse } from 'path';
 
 .block-id {
   text-align: center;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   font-family: 'LatoWebBold';
   font-size: 1.5rem;
