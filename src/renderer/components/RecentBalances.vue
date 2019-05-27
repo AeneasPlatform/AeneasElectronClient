@@ -1,69 +1,63 @@
 <template>
-    <div class="row">
-        <div class="col-md-12 col-lg-12">
-            <div class="card" >
-                <div class="card-header blocks-header">
-                    <!--<translate>Recent transactions</translate>-->
-                    <translate>Balances</translate>
-                </div>
-                <div class="card-block blocks">
-                    <b-button type="button" variant="default" @click="loadBalances" class="btn btn-outline-dark ae-border">
-                        <translate>LOAD BALANCES</translate>
-                    </b-button>
-                    <b-button type="button" variant="default" @click="save" class="btn btn-outline-dark ae-border">
-                        <translate>SAVE TO FILE</translate>
-                    </b-button>
-                </div>
-                <div class="card-block blocks">
-                    <b-form-input class="ae-text ae-ash-border" id="search"
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <div class="card" >
+        <div class="card-header blocks-header">
+          <!--<translate>Recent transactions</translate>-->
+          <translate>Balances</translate>
+        </div>
+        <div class="card-block blocks">
+          <b-button type="button" variant="default" @click="loadBalances" class="btn btn-outline-dark ae-border">
+            <translate>LOAD BALANCES</translate>
+          </b-button>
+          <b-button type="button" variant="default" @click="save" class="btn btn-outline-dark ae-border">
+            <translate>SAVE TO FILE</translate>
+          </b-button>
+        </div>
+        <div class="card-block blocks">
+          <b-form-input class="ae-text ae-ash-border" id="search"
                         type="text"
                         v-model="search"
-                        placeholder="Search.."></b-form-input>
-                </div>
-                <div class="card-block blocks horscroll">
-                    <table class="table blocksfont">
-                        <thead>
-                            <tr>
-                                <th @click="sort('addr')" scope="col"><translate>Addres</translate></th>
-                                <th scope="col"><translate>Balance</translate></th>
-                                <th @click="sort('blocksCount')" scope="col"><translate>Blocks count</translate></th>
-                                <th scope="col"><translate>In. Tx. count</translate></th>
-                                <th scope="col"><translate>Out. Tx. count</translate></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-bind:key="b.addr" v-for="b in filteredList">
-                                <td>{{b.addr}}</td>
-                                <td>{{b.balance.available}}</td>
-                                <td>{{b.blocksCount}}</td>
-                                <td>{{b.txsInCount}}</td>
-                                <td>{{b.txsOutCount}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </div>
+                        placeholder="Search..">
+          </b-form-input>
         </div>
-     </div>
+        <div class="card-block blocks horscroll">
+          <table class="table blocksfont">
+            <thead>
+              <tr>
+                <th @click="sort('addr')" scope="col"><translate>Address</translate></th>
+                <th scope="col"><translate>Balance</translate></th>
+                <th @click="sort('blocksCount')" scope="col"><translate>Blocks count</translate></th>
+                <th scope="col"><translate>In. Tx. count</translate></th>
+                <th scope="col"><translate>Out. Tx. count</translate></th>
+              </tr>
+            </thead>
+            <tbody v-bind:key="b.addr" v-for="b in filteredList">
+              <RecentBalance v-bind:newBalance="b"></RecentBalance>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import RecentBalance from '@/components/RecentBalance'
 
 function convertToCSV(objArray) {
-    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-    var str = '';
+  var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+  var str = '';
 
-    for (var i = 0; i < array.length; i++) {
-        var line = '';
-        for (var index in array[i]) {
-            if (line != '') line += ','
-
-            line += array[i][index];
-        }
-
-        str += line + '\r\n';
+  for (var i = 0; i < array.length; i++) {
+    var line = '';
+    for (var index in array[i]) {
+      if (line != '') line += ','
+      line += array[i][index];
     }
+    str += line + '\r\n';
+  }
 
-    return str;
+  return str;
 }
 
 export default {
@@ -78,7 +72,7 @@ export default {
     loadBalances () {
         this.$socket.sendObj({msg: {action: 'GetBalances'}})
     } ,
-    sort:function(s) {
+    sort : function(s) {
         //if s == current sort, reverse
         if(s === this.currentSort) {
             this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
@@ -102,6 +96,9 @@ export default {
         elem.click();        
         document.body.removeChild(elem);
     }
+  },
+  components: {
+    'RecentBalance': RecentBalance
   },
   computed: {
     blocks () { return this.$store.state.main.blocks },
