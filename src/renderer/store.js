@@ -260,14 +260,16 @@ function merge (a, b, prop) {
 function processTransactions(data) {
   // data = JSON.parse(data)
   const transactions = [];
-  console.log(data.txs[0]);
+  console.log(data.txs);
   for(let tx = 0; tx < data.txs.length; ++tx) {
+    console.log(data.txs[tx].timestamp)
     transactions.push({
+      blockId: data.txs[tx].blockid,
       id: data.txs[tx].txid, 
       address: data.txs[tx].to,
       amount: data.txs[tx].value, 
-      sender: data.addr, 
-      timestamp: data.txs[tx].fee
+      sender: data.txs[tx].from, 
+      timestamp: data.txs[tx].timestamp
     });
   }
   return transactions;

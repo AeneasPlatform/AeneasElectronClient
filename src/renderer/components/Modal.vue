@@ -5,25 +5,30 @@
         <div class="tx-modal-container">
           <div class="tx-modal-body">
             <slot name="body">
-              <div class="block-id">{{blockId}}</div>
-              <b-tabs style="margin-top:10px">
+              <div class="block-id">{{accId}}</div>
+              <b-tabs style="margin-top:10px;max-height:80%">
                 <b-tab title="general">
+                  <div class="table-block">
                   <table class="table blocksfont">
                     <thead>
                       <tr>
+                        <th class="modal-th modal-th-header" scope="col">block</th>
                         <th class="modal-th modal-th-header" scope="col">ID</th>
                         <th class="modal-th modal-th-header" scope="col">Timestamp</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-bind:key="tx.id" v-for="tx in transactions">
-                        <th class="modal-th">{{tx.id}}</th>
-                        <th class="modal-th">{{tx.timestamp}}</th>
+                      <tr v-bind:key="tx.id" v-for="tx in sortedTxs">
+                        <th class="modal-th" @click="sort('blockId')">{{tx.blockId}}</th>
+                        <th class="modal-th" @click="sort('id')">{{tx.id}}</th>
+                        <th class="modal-th">{{tt(tx.timestamp)}}</th>
                       </tr>
                     </tbody>
                   </table>
+                  </div>
                 </b-tab>
                 <b-tab title="transfer">
+                  <div class="table-block">
                   <table class="table blocksfont">
                     <thead>
                       <tr>
@@ -40,12 +45,12 @@
                       </tr>
                     </tbody>
                   </table>
+                  </div>
                 </b-tab>
               </b-tabs>
             </slot>
           </div>
-
-          <div class="modal-footer">
+          <div class="tx-modal-footer">
             <button class="modal-default-button" @click="$emit('close')">
               CLOSE
             </button>
@@ -58,13 +63,17 @@
 
 <script>
 import { parse } from 'path';
+import timeConverter from '@/components/timeFormat.js';
+
   export default {
     name: 'Modal',
     props: ['transactions', 'blockId'],
     data() {
       return {
         txs: this.transactions,
-        bId: this.blockId,
+        accId: this.accId,
+        currentSort:'block',
+        currentSortDir:'asc',
       }
     },
     methods: {
@@ -74,6 +83,25 @@ import { parse } from 'path';
         let str1 = str.substring(0, dot-1).replace(' ', '');
         let str2 = str.substring(dot-1, str.length).replace(/\B(?=(\d{4})+(?!\d))/g, ' ');
         return str1 + str2;
+      },
+      sort : function(s) {
+          //if s == current sort, reverse
+          if(s === this.currentSort) {
+              this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+          }
+          this.currentSort = s;
+      },
+      tt : (time) => timeConverter (time)
+    },
+    computed:{
+      sortedTxs () {
+        return this.transactions.sort((a,b) => {
+            let modifier = 1;
+            if(this.currentSortDir === 'desc') modifier = -1;
+            if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
+            if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
+            return 0;
+         }); 
       }
     }
   }
@@ -86,27 +114,28 @@ import { parse } from 'path';
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, .5);
-  display: table;
 }
 
 .tx-modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+  display: block;
+  width:80%;
+  height: 90%;
+  margin: auto;
 }
 
 .tx-modal-container {
-  width: 88%;
-  height: 70%;
-  margin: 0px auto;
+  margin: 10px 10px;
+  width: 100%;
+  height: 100%;
   padding: 0px 2rem;
   background-color: #fff;
   border-radius: 4px;
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0); */
   transition: all .5s ease;
   font-family: 'LatoWebMedium';
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .tx-modal-header h3 {
@@ -117,11 +146,36 @@ import { parse } from 'path';
 .tx-modal-body {
   margin-top: 10px;
   padding-bottom: 1px;
+  height: 85%;
+  overflow: hidden;
 }
 
-.table {
-  overflow-x: scroll;
-  overflow-y: scroll;
+@media screen and (max-height: 600px){
+  .table-block {
+    max-height: 300px;
+  }
+}
+
+@media screen and (max-height: 400px){
+  .table-block {
+    max-height: 100px;
+  }
+}
+
+@media screen and (max-height: 800px){
+  .table-block {
+    height: 400px;
+  }
+}
+
+@media screen and (max-height: 1024px){
+  .table-block {
+    height: 500px;
+  }
+}
+
+.table-block {
+  overflow: scroll;
 }
 
 .modal-th {
@@ -138,12 +192,13 @@ import { parse } from 'path';
 }
 
 .modal-default-button {
-  float: initial;
+  float: right;
 	border-radius: 1rem;
 	border: 1px solid gray;
 	cursor: pointer;
 	padding: 0.5rem 1rem;
 	text-decoration: none;
+  margin-top: 5px;
 }
 
 .modal-default-button:active {
@@ -153,7 +208,9 @@ import { parse } from 'path';
 
 .tx-modal-footer {
   border-top: 0;
+  height: 15%;
   justify-content: center;
+  background: #fff;
 }
 
 .block-id {
@@ -163,5 +220,6 @@ import { parse } from 'path';
   font-family: 'LatoWebBold';
   font-size: 1.5rem;
 }
+
 </style>
 
