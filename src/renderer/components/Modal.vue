@@ -5,7 +5,7 @@
         <div class="tx-modal-container">
           <div class="tx-modal-body">
             <slot name="body">
-              <div class="block-id">{{accId}}</div>
+              <div class="block-id">{{headerId}}</div>
               <b-tabs style="margin-top:10px;max-height:80%">
                 <b-tab title="general">
                   <div class="table-block">
@@ -67,11 +67,11 @@ import timeConverter from '@/components/timeFormat.js';
 
   export default {
     name: 'Modal',
-    props: ['transactions', 'blockId'],
+    props: ['transactions', 'header'],
     data() {
       return {
         txs: this.transactions,
-        accId: this.accId,
+        headerId: this.header,
         currentSort:'block',
         currentSortDir:'asc',
       }

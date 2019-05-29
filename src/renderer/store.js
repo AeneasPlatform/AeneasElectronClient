@@ -262,13 +262,13 @@ function processTransactions(data) {
   const transactions = [];
   console.log(data.txs);
   for(let tx = 0; tx < data.txs.length; ++tx) {
-    console.log(data.txs[tx].timestamp)
+    let from = data.txs[tx].from === undefined || data.txs[tx].from === null? "Network" : data.txs[tx].from
     transactions.push({
       blockId: data.txs[tx].blockid,
       id: data.txs[tx].txid, 
       address: data.txs[tx].to,
       amount: data.txs[tx].value, 
-      sender: data.txs[tx].from, 
+      sender: from, 
       timestamp: data.txs[tx].timestamp
     });
   }
