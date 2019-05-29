@@ -1,6 +1,6 @@
 {
   "name": "aeneas-sanctum-1.3",
-  "version": "1.3",
+  "version": "1.3.0",
   "author": "Luger <azazello369@gmail.com>",
   "description": "An electron-vue project",
   "license": "null",
@@ -45,7 +45,8 @@
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "target": "msi",
+      "icon": "build/icons/icon.png"
     },
     "linux": {
       "icon": "build/icons/icon.ico"

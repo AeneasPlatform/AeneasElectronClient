@@ -1,5 +1,7 @@
 # Aeneas Sanctum Desktop Client
 
+[![Build Status](https://travis-ci.org/AeneasPlatform/AeneasElectronClient.svg?branch=master)](https://travis-ci.org/AeneasPlatform/AeneasElectronClient)
+
 #### Build Setup
 
 ``` bash
@@ -11,6 +13,5 @@ npm run dev
 
 # build electron application for production
 npm run build
-
 
 ```
