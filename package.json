@@ -45,7 +45,8 @@
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "target": "msi",
+      "icon": "build/icons/icon.png"
     },
     "linux": {
       "icon": "build/icons/icon.ico"
