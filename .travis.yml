@@ -11,14 +11,17 @@ script:
   - mv Aeneas\ Sanctum\ 1.3.0.msi ../Aeneas.msi
   - cd ..
   - dir
-  
+
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
     secure: rQpvLdaGO+0pwOXzMIUoQHOuPckd8vAT/1R0PN/EW03fgYc5ffR7zHrQ/L2pYihnFwlLxojGurb6cqe3TxqwKPho9Szu+gw5+OpCVRpNLwnn95nDTe7Obv51dM346FtT9uf/xGENfj2k1mHvtd3VknGHWqB2YgS1d8siUS3lGRl3rhQnQHKtJVopX8/eu9Sd+pIZzAsSE0SV/chfMSXcL9LaH7AlN2vVn4aoChcRIvU34UYb0kS56LyTjRPdTby7JvmTm5e3CwwoHlFnTF0mBzdbvsUFhlzDjaxzZ9KkEXQ78OZ6lRS2BOW5HqkoEG/aNQITbYMGTeavbXwYUOjGZfD1252UuGsnjhHqCbbvJnjPBa9AgNrHuwLXrnwgnjEExlPd5UF5rT9S3/38ub6IuvVb2gU7ose2mUWl02qjydsuVmkJpJX/Bj4GrXomWXqYvUA04hHj4EPg6bqaTXEVF9GC63A2bE8xGMBy+8RvOGKL5ClQpfbBEVEki78ZSQZkEK+KHHYTryMJYZ28U6UxlIXeWzyVR4jJiTbpKYCA1MPXvRqMHAS89W4NpeiWGjDhpSySfgIuR5S/PAJlvoSajaMKzGJj48gQMw6fWSTXqwmKVjlCkMMwAUjb4WhTaoJ37F3CU4qxxJbRyt45GKByIRttXF3W+UoqtJZ0u8kZSbA=
-  file: 
+  file:
     - Aeneas.msi
   on:
     repo: AeneasPlatform/AeneasElectronClient
+    branches:
+      only:
+        - master
     tags: true
