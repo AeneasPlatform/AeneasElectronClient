@@ -7,6 +7,9 @@
             <b-tab title="blocks" active>
                 <RecentBlocks></RecentBlocks>
             </b-tab>
+            <b-tab title="search block">
+                <SearchBlocks></SearchBlocks>
+            </b-tab>
             <!-- <b-tab title="transactions">
                 <RecentTransactions></RecentTransactions>
             </b-tab> -->
@@ -26,6 +29,7 @@ import Navbar from '@/components/Navbar'
 import WalletInfo from '@/components/WalletInfo'
 // import RecentTransactions from '@/components/RecentTransactions'
 import RecentBlocks from '@/components/RecentBlocks'
+import SearchBlocks from '@/components/SearchBlocks'
 import RecentBalances from '@/components/RecentBalances'
 import OwnWalletInfo from '@/components/OwnWalletInfo'
 import SendAshForm from '@/components/SendAshForm'
@@ -36,6 +40,7 @@ export default {
     'Navbar': Navbar,
     'WalletInfo': WalletInfo,
     'RecentBlocks': RecentBlocks,
+    'SearchBlocks': SearchBlocks,
     'RecentBalances': RecentBalances,
     'OwnWalletInfo': OwnWalletInfo,
     // 'RecentTransactions': RecentTransactions,
