@@ -9,7 +9,7 @@
             </div>
             <div class="row client-title">
                 <div class="col-sm-12 text-center">
-                    <translate>Aeneas Sanctum Client. Version</translate> 1.3
+                    <translate>Aeneas Sanctum Client. Version</translate> 1.3.1
                 </div>
             </div>
             <div class="row motto-title">

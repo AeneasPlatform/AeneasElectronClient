@@ -24,7 +24,8 @@ let moduleMainStore = {
     seed: {}, // TODO add private key for sending messages
     blocks: [],
     balances : [],
-    transactions: []
+    transactions: [],
+    lastBlockSearch : {}
   },
   mutations: {
     login (state) {
@@ -76,6 +77,11 @@ let moduleMainStore = {
       b.unshift(obj)
       if (b.length > 20) b.pop()
       state.blocks = b
+    },
+    lastSearch (state, obj) {
+      /*          if (state.blocks === undefined) state.blocks = new Queue (2)
+          console.log (state.blocks) */
+      state.lastBlockSearch = obj
     },
     setBalances(state, arrBalance){
       state.balances = arrBalance
@@ -224,6 +230,10 @@ const store = new Vuex.Store({
     ReturnPowBlock (context, message){
       console.log (['ReturnPowBlock', message])
       context.commit("addmined", message)
+    },
+    SearchPowBlock (context, message){
+      console.log (['SearchPowBlock', message])
+      context.commit("lastSearch", message.pb)
     },
     SavedSeeds (context, message) {
       console.log('WOW SavedSeeds')
