@@ -19,7 +19,7 @@
                         :placeholder="toAddress">
                     </b-form-input>
                     <b-form-invalid-feedback :state="addressState">
-                        Address should start with Æ and has 52 length.
+                        Address should start with Æ and length is 52 characters.
                         Example: Æx4btjyE4gkxBv3fQXPVL52vWJqQW8tDxh3hBDkqHpucGDA4YK4C
                     </b-form-invalid-feedback>
                   </b-form-group>
@@ -80,7 +80,7 @@ export default {
     // },
     onSubmit: function () {
       if (Validator.methods.isAddressValid(this.form.address) &&
-      Validator.methods.isAmountValid(this.form.amount)) {
+      Validator.methods.isGreaterThenZero(this.form.amount)) {
 
           let sendAsh = {msg: {action: 'SendAsh',
                   address: this.form.address,
@@ -98,7 +98,7 @@ export default {
           this.form.address = ''
           this.form.amount = ''
       } else {
-          console.log('Fields is not valid')
+          console.log('Fields are not valid')
       }
     }
   },
@@ -107,7 +107,7 @@ export default {
         return Validator.methods.isAddressValid(this.form.address)
     },
     amountState: function () {
-        return Validator.methods.isAmountValid(this.form.amount)
+        return Validator.methods.isGreaterThenZero(this.form.amount)
     },
     balance () { return this.$store.state.main.balance },
     unconfirmedBalance () { return this.$store.state.main.unconfirmedBalance },

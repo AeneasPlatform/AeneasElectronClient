@@ -7,8 +7,8 @@
                 const startSymbol = 'Æ'
                 return address.length === 52 && address.charAt(0) === startSymbol
             },
-            isAmountValid: function (amount) {
-                let number = BigNumber(amount)
+            isGreaterThenZero: function (num) {
+                let number = BigNumber(num)
                 return number.isPositive() && !number.isZero()
             }
         }
