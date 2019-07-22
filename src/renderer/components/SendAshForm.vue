@@ -9,23 +9,34 @@
                 <b-form @submit="onSubmit" >
                   <b-form-group id="toaddrgroup"
                     :label="toAddress"
-                    label-for="address">
+                    label-for="address"
+                    :state="addressState">
                     <b-form-input class="ae-text ae-ash-border" id="address"
                         type="text"
                         v-model="form.address"
+                        :state="addressState"
                         required
                         :placeholder="toAddress">
                     </b-form-input>
+                    <b-form-invalid-feedback :state="addressState">
+                        Address should start with Æ and has 52 length.
+                        Example: Æx4btjyE4gkxBv3fQXPVL52vWJqQW8tDxh3hBDkqHpucGDA4YK4C
+                    </b-form-invalid-feedback>
                   </b-form-group>
                   <b-form-group id="amountgroup"
                     :label="amountToSend"
-                    label-for="amount">
+                    label-for="amount"
+                    :state="amountState">
                     <b-form-input class="ae-text ae-ash-border" id="amount"
                         type="text"
                         v-model="form.amount"
+                        :state="amountState"
                         required
                         :placeholder="amountToSend">
                     </b-form-input>
+                     <b-form-invalid-feedback :state="amountState">
+                          Amount should be more than zero.
+                     </b-form-invalid-feedback>
                   </b-form-group>
                   <b-form-group id="feegroup"
                     :label="fee"
@@ -67,16 +78,17 @@ export default {
     // formValidate: function(msg) {
     //   return !(!msg.address.includes("Æ") || parseFloat(msg.fee) < 0.001);
     // },
-
     onSubmit: function () {
-      let sendAsh = {msg: {action: 'SendAsh',
-        address: this.form.address,
-        fee: BigNumber(this.form.fee).multipliedBy(this.exp).toString(),
-        amount: BigNumber(this.form.amount).multipliedBy(this.exp).toString(),
-        from: this.seed.address}
-      }
       if (Validator.methods.isAddressValid(this.form.address) &&
       Validator.methods.isAmountValid(this.form.amount)) {
+
+          let sendAsh = {msg: {action: 'SendAsh',
+                  address: this.form.address,
+                  fee: BigNumber(this.form.fee).multipliedBy(this.exp).toString(),
+                  amount: BigNumber(this.form.amount).multipliedBy(this.exp).toString(),
+                  from: this.seed.address}
+          }
+
           console.log(sendAsh)
           // if (this.formValidate(sendAsh))
           this.$socket.sendObj(sendAsh)
@@ -91,6 +103,12 @@ export default {
     }
   },
   computed: {
+    addressState: function () {
+        return Validator.methods.isAddressValid(this.form.address)
+    },
+    amountState: function () {
+        return Validator.methods.isAmountValid(this.form.amount)
+    },
     balance () { return this.$store.state.main.balance },
     unconfirmedBalance () { return this.$store.state.main.unconfirmedBalance },
     seed () { return this.$store.state.main.seed },
