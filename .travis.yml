@@ -8,7 +8,7 @@ script:
   - npm rebuild node-sass --force
   - npm run build
   - cd build
-  - mv Aeneas\ Sanctum\ 1.3.0.msi ../Aeneas.msi
+  - mv Aeneas\ Sanctum\ *.msi ../Aeneas.msi
   - cd ..
   - dir
 

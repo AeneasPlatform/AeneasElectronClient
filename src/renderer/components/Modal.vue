@@ -12,13 +12,20 @@
                   <table class="table blocksfont">
                     <thead>
                       <tr>
-                        <th class="modal-th modal-th-header" scope="col">block</th>
+                        <th class="modal-th modal-th-header" scope="col">block&nbsp;
+                          <b-form-input class="ae-text ae-ash-border" id="modalblocksearch"
+                            type="text"
+                            v-model="modalblocksearch"
+                            placeholder="Search..">
+                          </b-form-input>
+
+                        </th>
                         <th class="modal-th modal-th-header" scope="col">ID</th>
                         <th class="modal-th modal-th-header" scope="col">Timestamp</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-bind:key="tx.id" v-for="tx in sortedTxs">
+                      <tr v-bind:key="tx.id" v-for="tx in filteredList">
                         <th class="modal-th" @click="sort('blockId')">{{tx.blockId}}</th>
                         <th class="modal-th" @click="sort('id')">{{tx.id}}</th>
                         <th class="modal-th">{{tt(tx.timestamp)}}</th>
@@ -32,13 +39,25 @@
                   <table class="table blocksfont">
                     <thead>
                       <tr>
-                        <th class="modal-th modal-th-header" scope="col">Sender</th>
-                        <th class="modal-th modal-th-header" scope="col">Destination</th>
+                        <th class="modal-th modal-th-header" scope="col">Sender&nbsp;
+                          <b-form-input class="ae-text ae-ash-border" id="modalsendersearch"
+                            type="text"
+                            v-model="modalsendersearch"
+                            placeholder="Search..">
+                          </b-form-input>
+                          </th>
+                        <th class="modal-th modal-th-header" scope="col">Destination&nbsp;
+                          <b-form-input class="ae-text ae-ash-border" id="modaldestsearch"
+                            type="text"
+                            v-model="modaldestsearch"
+                            placeholder="Search..">
+                          </b-form-input>
+                          </th>
                         <th class="modal-th modal-th-header" scope="col">Amount</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-bind:key="tx.id" v-for="tx in transactions">
+                      <tr v-bind:key="tx.id" v-for="tx in filteredList">
                         <th class="modal-th">{{tx.sender}}</th>
                         <th class="modal-th">{{tx.address}}</th>
                         <th class="modal-th">{{numberWithDots(tx.amount)}}</th>
@@ -74,6 +93,9 @@ import timeConverter from '@/components/timeFormat.js';
         headerId: this.header,
         currentSort:'block',
         currentSortDir:'asc',
+        modalblocksearch:"",
+        modalsendersearch:"",
+        modaldestsearch:""
       }
     },
     methods: {
@@ -102,7 +124,16 @@ import timeConverter from '@/components/timeFormat.js';
             if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
             return 0;
          }); 
-      }
+      },
+      filteredList() {
+        return this.sortedTxs.filter(b => {
+          let fields = {"blockId" : this.modalblocksearch, "sender":this.modalsendersearch, "address":this.modaldestsearch}
+          return Object.keys(fields).filter( fi => {
+            return b[fi].toLowerCase().includes(fields[fi])
+          }).length === 3
+        })
+      },
+
     }
   }
 </script>
