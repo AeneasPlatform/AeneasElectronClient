@@ -49,6 +49,7 @@
 </template>
 <script>
 import {BigNumber} from 'bignumber.js'
+import Validator from './Validator.vue'
 
 export default {
   name: 'SendAshForm',
@@ -74,11 +75,19 @@ export default {
         amount: BigNumber(this.form.amount).multipliedBy(this.exp).toString(),
         from: this.seed.address}
       }
-      console.log(sendAsh)
-      // if (this.formValidate(sendAsh))
-       this.$socket.sendObj(sendAsh)
+      if (Validator.methods.isAddressValid(this.form.address) &&
+      Validator.methods.isAmountValid(this.form.amount)) {
+          console.log(sendAsh)
+          // if (this.formValidate(sendAsh))
+          this.$socket.sendObj(sendAsh)
 
-      // this.$store.commit ("seed", this.seed)
+          // this.$store.commit ("seed", this.seed)
+
+          this.form.address = ''
+          this.form.amount = ''
+      } else {
+          console.log('Fields is not valid')
+      }
     }
   },
   computed: {
