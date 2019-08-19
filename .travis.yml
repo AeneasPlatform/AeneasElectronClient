@@ -21,7 +21,7 @@ deploy:
     - Aeneas.msi
   on:
     repo: AeneasPlatform/AeneasElectronClient
-#    branches:
-#      only:
-#        - master
-#    tags: true
+    branches:
+      only:
+        - master
+    tags: true
