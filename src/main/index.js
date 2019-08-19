@@ -12,9 +12,45 @@ if (process.env.NODE_ENV !== 'development') {
 
 
 let mainWindow;
-const winURL = process.env.NODE_ENV === 'development'
+
+const isdev = process.env.NODE_ENV === 'development' 
+const winURL = isdev
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`;
+
+function runApp () {
+  let child = require('child_process').execFile
+  let executablePath = "./run.sh"
+  child(executablePath, function(err, data) {
+    if(err){
+       console.error(err);
+       return;
+    }
+ 
+    console.log(data.toString());
+
+
+  });
+
+
+}
+
+function stopApp () {
+  let child = require('child_process').execFile
+  let executablePath = "./stop.sh"
+  child(executablePath, function(err, data) {
+    if(err){
+       console.error(err);
+       return;
+    }
+ 
+    console.log(data.toString());
+
+
+  });
+
+
+}
 
 function createWindow () {
   /**
@@ -42,8 +78,9 @@ function createWindow () {
   });
 
   mainWindow.loadURL(winURL);
-
+  if (!isdev) runApp()
   mainWindow.on('closed', () => {
+    if (!isdev) stopApp()
     mainWindow = null
   })
 }

@@ -57,11 +57,9 @@ export default {
       this.$socket.sendObj({msg: {action: 'Signup'}})
     },
     importAccount () {
-      // this.$socket.sendObj({msg:{action:"Signup"}})
       this.$router.push('/import')
     },
     clicked (seed) {
-      // this.$store.commit ("step", 11)//go to Login
       this.$store.commit('seed', seed)// go to Login
       this.$router.push('/login')
     }
