@@ -18,23 +18,3 @@ APIADDR="127.0.0.1:9085" \
 	WORDSDICT="./words.csv" \
 	java -Xmx1g -Xms256M \
 	-Dlogback.configurationFile=logback.xml -jar ./aeneas-assembly.jar &
-
-sleep 10
-
-URL="http://localhost:9085"
-
-if [[ "$OSTYPE" == "linux-gnu" ]] 
-    then
-    if which xdg-open > /dev/null
-    then
-        xdg-open $URL
-    elif which gnome-open > /dev/null
-    then
-        gnome-open $URL
-    fi
-elif [[ "$OSTYPE" == "darwin"* ]] 
-    then
-    /usr/bin/open $URL
-fi
-
-

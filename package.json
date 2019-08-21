@@ -13,6 +13,8 @@
     "build:win": "electron-packager . Aeneas-Sanctum platform=win32",
     "dev": "node .electron-vue/dev-runner.js",
     "pack": "npm run pack:main && npm run pack:renderer",
+    "pack-win": "cross-env NODE_ENV=production build --dir --win",
+    "pack-lin": "cross-env NODE_ENV=production build --dir --linux",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "postinstall": ""
@@ -45,7 +47,7 @@
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "target": "msi",
+      "target": "zip",
       "icon": "build/icons/icon.png"
     },
     "linux": {
