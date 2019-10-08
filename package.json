@@ -52,11 +52,11 @@
     },
     "win": {
       "target": "portable",
-      "icon": "build/icons/icon.png"
+      "icon": "icons/icon.png"
     },
     "linux": {
       "target": "AppImage",
-      "icon": "build/icons/512x512.png"
+      "icon": "icons/512x512.png"
     }
   },
   "dependencies": {
