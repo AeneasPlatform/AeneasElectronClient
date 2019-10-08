@@ -6,13 +6,14 @@
 </template>
 
 <script>
-import Loading from '@/components/Loading'
+import Loading from './components/Loading'
 export default {
   name: 'App',
   components: {
     'Loading': Loading
   },
   beforeCreate () {
+    console.log("beforeCreate in App")
     this.$store.commit('initialiseStore')
   },
   computed: {

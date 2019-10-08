@@ -17,7 +17,11 @@
     "pack-lin": "cross-env NODE_ENV=production build --dir --linux",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": ""
+    "postinstall": "electron-builder install-app-deps",
+    "distLinux": "electron-builder --linux",
+    "distWin": "electron-builder --win",
+    "distAll": "electron-builder --mwl",
+    "dist": "electron-builder"
   },
   "build": {
     "productName": "Aeneas Sanctum",
@@ -47,11 +51,12 @@
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "target": "zip",
+      "target": "portable",
       "icon": "build/icons/icon.png"
     },
     "linux": {
-      "icon": "build/icons/icon.ico"
+      "target": "AppImage",
+      "icon": "build/icons/512x512.png"
     }
   },
   "dependencies": {
