@@ -19,8 +19,17 @@ const winURL = isdev
   : `file://${__dirname}/index.html`;
 
 function runApp () {
-  let child = require('child_process').execFile
-  let executablePath = "./run.sh"
+  let child = require('child_process').execFile;
+
+  let os = process.platform;
+  let executablePath = ''
+
+  if (os === 'linux') {
+    executablePath = "./run.sh"
+  } else if (os === 'win32') {
+    executablePath = './run.ps1'
+  }
+
   child(executablePath, function(err, data) {
     if(err){
        console.error(err);
@@ -36,8 +45,17 @@ function runApp () {
 }
 
 function stopApp () {
-  let child = require('child_process').execFile
-  let executablePath = "./stop.sh"
+  let child = require('child_process').execFile;
+
+  let os = process.platform;
+  let executablePath = ''
+
+  if (os === 'linux') {
+    executablePath = "./stop.sh"
+  }
+  // else if (os === 'win32') {
+  //   executablePath = './stop.ps1'
+  // }
   child(executablePath, function(err, data) {
     if(err){
        console.error(err);
@@ -45,7 +63,6 @@ function stopApp () {
     }
  
     console.log(data.toString());
-
 
   });
 
@@ -76,6 +93,11 @@ function createWindow () {
     useContentSize: true,
     width: 1000
   });
+
+
+  var os = require('os');
+  console.log('YOUR OS = ' + process.platform);
+  console.log('YOUR OS = ' + os.platform());
 
   mainWindow.loadURL(winURL);
   if (!isdev) runApp()

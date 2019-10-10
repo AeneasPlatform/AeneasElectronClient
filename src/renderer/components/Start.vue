@@ -10,7 +10,7 @@
 				<div class="row client-title">
 					<div class="col-sm-12 text-center">
 						<translate>Aeneas Sanctum Client. Version</translate>
-						1.3.1
+						1.4 beta
 					</div>
 				</div>
 				<div class="row motto-title">

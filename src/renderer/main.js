@@ -18,7 +18,7 @@ console.log("in main.js before bootstrap vue components")
 // import BootstrapVue from "bootstrap-vue";
 // Vue.use(BootstrapVue);
 /** bootstrap vue components */
-import {BModal} from 'bootstrap-vue/es/components/modal'
+import {BModal} from 'bootstrap-vue'
 import {BNavbar} from 'bootstrap-vue'
 import {BDropdown} from 'bootstrap-vue'
 import {BForm, BFormInput, BFormTextarea, BInputGroup, BFormGroup, BButton, BTabs} from 'bootstrap-vue'
