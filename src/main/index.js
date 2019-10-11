@@ -12,9 +12,49 @@ if (process.env.NODE_ENV !== 'development') {
 
 
 let mainWindow;
-const winURL = process.env.NODE_ENV === 'development'
+
+const isdev = process.env.NODE_ENV === 'development' 
+const winURL = isdev
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`;
+
+function runChildProcess(executablePath) {
+  let child = require('child_process').execFile;
+
+  child(executablePath, function(err, data) {
+    if(err){
+      console.error(err);
+      return;
+    }
+    console.log(data.toString());
+  });
+}
+
+function runApp () {
+  let os = process.platform;
+  let executablePath = ''
+
+  if (os === 'linux' || os === 'darwin') {
+    executablePath = "./run.sh"
+    runChildProcess(executablePath)
+  } else if (os === 'win32') {
+    executablePath = './run.ps1'
+    runChildProcess(executablePath)
+  }
+}
+
+function stopApp () {
+  let os = process.platform;
+  let executablePath = ''
+
+  if (os === 'linux' || os === 'darwin') {
+    executablePath = "./stop.sh"
+    runChildProcess(executablePath)
+  }
+  // else if (os === 'win32') {
+  //   executablePath = './stop.ps1'
+  // }
+}
 
 function createWindow () {
   /**
@@ -41,9 +81,15 @@ function createWindow () {
     width: 1000
   });
 
-  mainWindow.loadURL(winURL);
 
+  var os = require('os');
+  console.log('YOUR OS = ' + process.platform);
+  console.log('YOUR OS = ' + os.platform());
+
+  mainWindow.loadURL(winURL);
+  if (!isdev) runApp()
   mainWindow.on('closed', () => {
+    if (!isdev) stopApp()
     mainWindow = null
   })
 }

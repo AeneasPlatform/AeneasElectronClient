@@ -1,5 +1,5 @@
 {
-  "name": "aeneas-sanctum-1.3",
+  "name": "aeneas-sanctum-1.3.1",
   "version": "1.3.1",
   "author": "Luger <azazello369@gmail.com>",
   "description": "An electron-vue project",
@@ -13,9 +13,14 @@
     "build:win": "electron-packager . Aeneas-Sanctum platform=win32",
     "dev": "node .electron-vue/dev-runner.js",
     "pack": "npm run pack:main && npm run pack:renderer",
+    "pack-win": "cross-env NODE_ENV=production build --dir --win",
+    "pack-lin": "cross-env NODE_ENV=production build --dir --linux",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": ""
+    "postinstall": "electron-builder install-app-deps",
+    "distLinux": "electron-builder --linux",
+    "distWin": "electron-builder --win",
+    "dist": "electron-builder"
   },
   "build": {
     "productName": "Aeneas Sanctum",
@@ -42,14 +47,16 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "target": "dmg",
+      "icon": "icons/icon.ico"
     },
     "win": {
-      "target": "msi",
-      "icon": "build/icons/icon.png"
+      "target": "portable",
+      "icon": "icons/icon.ico"
     },
     "linux": {
-      "icon": "build/icons/icon.ico"
+      "target": "AppImage",
+      "icon": "icons/512x512.png"
     }
   },
   "dependencies": {

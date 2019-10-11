@@ -36,16 +36,16 @@
     </b-navbar>
 </template>
 <script>
-import collapse from 'bootstrap-vue/es/components/collapse/collapse'
-import toggle from 'bootstrap-vue/es/directives/toggle/toggle'
+import BCollapse from 'bootstrap-vue'
+import BToggle from 'bootstrap-vue'
 
 export default {
   name: 'Navbar',
   components: {
-    'b-collapse': collapse
+    'b-collapse': BCollapse
   },
   directives: {
-    'b-toggle': toggle
+    'b-toggle': BToggle
   },
   data: function () {
     return {
