@@ -51,9 +51,10 @@ function stopApp () {
     executablePath = "./stop.sh"
     runChildProcess(executablePath)
   }
-  // else if (os === 'win32') {
-  //   executablePath = './stop.ps1'
-  // }
+  else if (os === 'win32') {
+    executablePath = './stop.ps1'
+    runChildProcess(executablePath)
+  }
 }
 
 function createWindow () {

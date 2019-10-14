@@ -1,8 +1,8 @@
 #! /bin/bash
-ps aux  |  grep -i aeneas-assembly  |  awk '{print $2}'  |  xargs kill -9
-ps aux  |  grep -i Aeneas-assembly  |  awk '{print $2}'  |  xargs kill -9
+ps aux  |  grep -i aeneas  |  awk '{print $2}'  |  xargs kill -9
+ps aux  |  grep -i Aeneas  |  awk '{print $2}'  |  xargs kill -9
 
-chmod 755 aeneas-assembly.jar
+chmod 755 aeneas.jar
 
 sleep 10
 
@@ -17,4 +17,4 @@ APIADDR="127.0.0.1:9085" \
 	PKCS12KEY="./key/server.p12" \
 	WORDSDICT="./words.csv" \
 	java -Xmx1g -Xms256M \
-	-Dlogback.configurationFile=logback.xml -jar ./aeneas-assembly.jar &
+	-Dlogback.configurationFile=logback.xml -jar ./aeneas.jar &

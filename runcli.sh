@@ -1,6 +1,6 @@
 #! /bin/bash
-ps aux  |  grep -i aeneas-assembly  |  awk '{print $2}'  |  xargs kill -15
-ps aux  |  grep -i Aeneas-assembly  |  awk '{print $2}'  |  xargs kill -15
+ps aux  |  grep -i aeneas  |  awk '{print $2}'  |  xargs kill -15
+ps aux  |  grep -i Aeneas  |  awk '{print $2}'  |  xargs kill -15
 
 chmod 755 aeneas-assembly.jar
 
@@ -19,5 +19,5 @@ APIADDR="127.0.0.1:9084" \
 SEED=2gdyJ6bFGcYrowUMENotjNwapSpFWiEj1SwXJwF2BwAAYjpgUwXLxHTGeJeN2hs2aQoZDQevhmijvisi2gUC4j5VUw5ArqYvf8HQtUabwibGQYpcrWRHcNULUbEFBK7jULWtVDa2rw4Co4riYJsEMBuetHroTwJhDuHspF9yvWpY39w6UVhYHVFb8KuCzbx78MVNoyURRZqwKQ2y7rAHJao4PBSPgeoREGkXpUaaVz53LTMWSMxS31VYfFEjTuBaoCjJhvmbvxcPdXveK4tskfBR66PDV1sEgSJi17RkiuXHY52EHBQSia2jYfoLrGyYiRMT7HZhVYrSckC4j9869tRtRDH6huL5T\
 PWD=123\
 	java -Xmx1g -Xms256M \
-	-Dlogback.configurationFile=logback.xml -jar ./aeneas-assembly.jar &
+	-Dlogback.configurationFile=logback.xml -jar ./aeneas.jar &
 
