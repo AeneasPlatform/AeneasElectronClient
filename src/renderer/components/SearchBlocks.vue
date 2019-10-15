@@ -33,9 +33,11 @@
   </div>
 </template>
 <script>
-import RecentBlock from '@/components/RecentBlock'
+  import RecentBlock from '@/components/RecentBlock'
+  import {BFormInput} from 'bootstrap-vue'
 
-function isInt(value) {
+
+  function isInt(value) {
   return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
 }
 
@@ -61,7 +63,8 @@ export default {
     }
   },
   components: {
-    'RecentBlock': RecentBlock
+    'RecentBlock': RecentBlock,
+    'b-form-input': BFormInput
   },
 }
 </script>

@@ -88,3 +88,7 @@ lerna-debug.log
 .DS_Store
 Thumbs.db
 build
+
+#yarn setttings
+yarn.lock
+.yarnclean

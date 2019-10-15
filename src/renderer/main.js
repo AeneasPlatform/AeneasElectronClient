@@ -21,18 +21,19 @@ console.log("in main.js before bootstrap vue components")
 import {BModal} from 'bootstrap-vue'
 import {BNavbar} from 'bootstrap-vue'
 import {BDropdown} from 'bootstrap-vue'
-import {BForm, BFormInput, BFormTextarea, BInputGroup, BFormGroup, BButton, BTabs} from 'bootstrap-vue'
+import {BForm, BFormInput, BFormTextarea, BInputGroup, BFormGroup, BButton, BTabs, BTab} from 'bootstrap-vue'
 
-Vue.component(BModal)
-Vue.component(BNavbar)
-Vue.component(BDropdown)
-Vue.component(BForm)
-Vue.component(BFormInput)
-Vue.component(BInputGroup)
-Vue.component(BFormTextarea)
-Vue.component(BFormGroup)
-Vue.component(BButton)
-Vue.component(BTabs)
+Vue.component('b-modal', BModal)
+Vue.component('b-navbar', BNavbar)
+Vue.component('b-dropdown', BDropdown)
+Vue.component('b-form', BForm)
+Vue.component('b-form-input', BFormInput)
+Vue.component('b-input-group', BInputGroup)
+Vue.component('b-form-textarea', BFormTextarea)
+Vue.component('b-form-group', BFormGroup)
+Vue.component('b-button', BButton)
+Vue.component('b-tabs', BTabs)
+Vue.component('b-tab', BTab)
 
 console.log("in main.js before VueClipboard")
 
@@ -41,31 +42,31 @@ Vue.use(VueClipboard)
 console.log("in main.js before VueNativeSock")
 
 Vue.use(VueNativeSock, 'ws://localhost:9085/aeneas', {
-  store: store,
-  format: 'json',
-  reconnection: true,
-  // reconnectionAttempts: 5,
-  reconnectionDelay: 5000
+    store: store,
+    format: 'json',
+    reconnection: true,
+    // reconnectionAttempts: 5,
+    reconnectionDelay: 5000
 })
 
 console.log("in main.js before GetTextPlugin")
 
 Vue.use(GetTextPlugin, {
-  translations: translations,
-  availableLanguages: {
-    en_US: 'English',
-    uk_UA: 'Українська',
-    ru_RU: 'Русский'
-  },
-  defaultLanguage: 'en_US',
-  languageVmMixin: {
-    computed: {
-      currentKebabCase: function () {
-        return this.current.toLowerCase().replace('_', '-')
-      }
-    }
-  },
-  silent: true
+    translations: translations,
+    availableLanguages: {
+        en_US: 'English',
+        uk_UA: 'Українська',
+        ru_RU: 'Русский'
+    },
+    defaultLanguage: 'en_US',
+    languageVmMixin: {
+        computed: {
+            currentKebabCase: function () {
+                return this.current.toLowerCase().replace('_', '-')
+            }
+        }
+    },
+    silent: true
 })
 
 console.log("in main.js before Vue.config.productionTip = false")
@@ -73,25 +74,25 @@ console.log("in main.js before Vue.config.productionTip = false")
 Vue.config.productionTip = false
 
 const errorMsgs = [
-  // $gettext("")
+    // $gettext("")
 ]
 
 console.log("in main.js before let vue = new Vue({")
 
 /* eslint-disable no-new */
 let vue = new Vue({
-  el: '#app',
-  router,
-  store,
+    el: '#app',
+    router,
+    store,
 
-  components: { App },
-  template: '<App/>'
-})
+    components: {App},
+    template: '<App/>'
+}).$mount()
 
 let getErrorMsg = function (msg) {
-  let m = vue.__proto__.$gettext(msg)
-  store.commit('appErrorMsg', m)
-  return m
+    let m = vue.__proto__.$gettext(msg)
+    store.commit('appErrorMsg', m)
+    return m
 }
 
 console.log("in main.js after all")
