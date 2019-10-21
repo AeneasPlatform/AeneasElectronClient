@@ -80,12 +80,12 @@
                 return this.$store.state.signInStore.step
             }
         },
-        watch: {
+/*        watch: {
             step(newValue) {
                 console.log('SUCH WOW' + newValue)
                 redirect_to(this.$router, newValue)
             }
-        },
+        },*/
         methods: {
             onSubmit: function () {
                 this.$socket.sendObj({msg: {action: 'Login', pwd: this.form.password, seed: this.seed.seed}})

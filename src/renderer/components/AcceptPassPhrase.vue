@@ -56,12 +56,12 @@ export default {
       return this.$store.state.signInStore.step
     }
   },
-  watch: {
+  /*watch: {
     step (newValue) {
       console.log('SUCH WOW' + newValue)
       redirect_to(this.$router, newValue)
     }
-  },
+  },*/
   methods: {
     copySucess: function () {
       this.arialabel = 'Copied!'

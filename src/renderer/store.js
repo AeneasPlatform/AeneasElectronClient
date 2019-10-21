@@ -124,6 +124,7 @@ const moduleSignInStore = {
       state.confirmationPassPhrase = passPhrase
     },
     allSeeds (state, seeds) {
+      console.log (seeds)
       state.allSeeds = seeds
     },
     step (state, value) {
@@ -244,11 +245,14 @@ const store = new Vuex.Store({
       context.commit('unconfirmedBalance', message.balance.unconfirmed)
       context.commit('mergeBlocks', message.lastBlocks)
       context.commit('peers', message.peers)
+      console.log ([message.loggedIn, context.getters.getStep])
       if (message.loggedIn === false && context.getters.getStep === 4) {
         console.log('logout')
         context.commit('logout')
         context.commit('step', 0)
         location.reload()
+      }else {
+        context.commit('step', 4)
       }
     },
     AddressBalance(context, message) {

@@ -68,7 +68,6 @@
             } else {
                 this.$router.push('/dashboard')
                 this.$store.commit('login')
-                console.log('logged')
                 var obj = this
                 setTimeout(() => {
                     console.log('GetSavedSeeds: ok')

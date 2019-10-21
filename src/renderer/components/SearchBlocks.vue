@@ -37,9 +37,22 @@
   import {BFormInput} from 'bootstrap-vue'
 
 
-  function isInt(value) {
-  return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
-}
+  const hasOwnProperty = Object.prototype.hasOwnProperty;
+
+  function isEmpty(obj) {
+      if (obj == null) return true;
+      if (obj.length > 0)    return false;
+      if (obj.length === 0)  return true;
+      if (typeof obj !== "object") return true;
+      for (var key in obj) {
+          if (hasOwnProperty.call(obj, key)) return false;
+      }
+      return true;
+  }
+
+function isInt(value) {
+    return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
+  }
 
 export default {
   name: 'SearchBlocks',
@@ -48,8 +61,8 @@ export default {
     }
   },  
   computed: {
-    searchblock () { 
-      if (this.$store.state.main.lastBlockSearch)
+    searchblock () {
+      if (!isEmpty (this.$store.state.main.lastBlockSearch))
         return [this.$store.state.main.lastBlockSearch] 
       else []} 
   },

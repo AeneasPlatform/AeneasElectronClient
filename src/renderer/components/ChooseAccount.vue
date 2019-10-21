@@ -10,7 +10,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-14 text-center">
-                        <div class="seed ae-monospace" @click="clicked(seed)" v-bind:key="seed.address" v-for="seed in allSeeds">{{seed.address}}</div>
+                        <div class="seed ae-monospace" @click="clicked(seed)" v-bind:key="seed.seed" v-for="seed in allSeeds">{{seed.address}}</div>
                     </div>
                 </div>
                 <div class="row justify-content-center" style="margin-top:20px;">
@@ -45,12 +45,12 @@ export default {
       return this.$store.state.signInStore.allSeeds
     }
   },
-  watch: {
+  /*watch: {
     step (newValue) {
       console.log('SUCH WOW' + newValue)
       redirect_to(this.$router, newValue)
     }
-  },
+  },*/
   methods: {
     newAccount () {
       console.log('new Account')

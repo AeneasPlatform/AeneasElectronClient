@@ -42,7 +42,7 @@
 <script>
     import redirect_to from '../redirect_to'
     import {BDropdown, BDropdownItem} from 'bootstrap-vue'
-
+    import {mapState} from 'vuex'
 
     console.log('start view')
 
@@ -64,7 +64,8 @@
             },
             fetcherRun() {
                 return this.$store.state.main.fetcherRun
-            }
+            },
+            //step:mapState (['step'])
         },
         created: function () {
             console.log('logged:' + this.$store.state.main.logged)
@@ -80,6 +81,12 @@
                 }
             }
             this.fetchSeed()
+            this.$store.watch(
+            (state, getters) => getters.step,
+            (newValue, oldValue) => {
+                console.log(`Updating from ${oldValue} to ${newValue}`);
+
+            });
         },
         methods: {
             fetchSeed: function () {
@@ -94,7 +101,15 @@
                     }, 10000)
                 }
             }
-        }
+        },
+        watch: {
+            step(newValue) {
+                console.log('SUCH WOW' + newValue)
+                redirect_to(this.$router, newValue)
+                this.$router.push('/dashboard')
+            }
+        },
+
     }
 
 </script>

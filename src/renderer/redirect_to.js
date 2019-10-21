@@ -15,6 +15,7 @@ function redirect_to (router, step) {
       router.push('/setpwd')
       break
     case 4:
+      console.log ("here we go")
       router.push('/dashboard')
       break
     case 11:
