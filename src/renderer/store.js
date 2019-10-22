@@ -131,6 +131,7 @@ const moduleSignInStore = {
       state.step = value
     },
     fetcher (state, value) {
+      console.log ("FETCHER CALLED  ")
       state.fetcherRun = value
     },
     route (state, value) {
@@ -144,7 +145,8 @@ const moduleSignInStore = {
   },
   getters: {
     getStep: state => state.step,
-    getRoute: state => state.route
+    getRoute: state => state.route,
+    getFetcher: state => state.fetcherRun
   }
 }
 
@@ -251,8 +253,6 @@ const store = new Vuex.Store({
         context.commit('logout')
         context.commit('step', 0)
         location.reload()
-      }else {
-        context.commit('step', 4)
       }
     },
     AddressBalance(context, message) {

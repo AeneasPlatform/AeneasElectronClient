@@ -63,7 +63,7 @@
                 return this.$store.state.signInStore.step
             },
             fetcherRun() {
-                return this.$store.state.main.fetcherRun
+                return this.$store.state.signInStore.fetcherRun
             },
             //step:mapState (['step'])
         },
@@ -81,12 +81,6 @@
                 }
             }
             this.fetchSeed()
-            this.$store.watch(
-            (state, getters) => getters.step,
-            (newValue, oldValue) => {
-                console.log(`Updating from ${oldValue} to ${newValue}`);
-
-            });
         },
         methods: {
             fetchSeed: function () {
@@ -96,6 +90,7 @@
                 }, 1000)
                 if (!this.fetcherRun) {
                     this.$store.commit('fetcher', true)
+                    console.log(this.fetcherRun)
                     setInterval(() => {
                         this.$socket.sendObj({msg: {action: 'GetSavedSeeds'}})
                     }, 10000)

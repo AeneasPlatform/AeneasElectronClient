@@ -33,6 +33,12 @@
                         </span>
                         <span>{{numberWithDots(fullBalance)}}</span> ASH
                     </div>
+                    <div>
+                        <span class="card-subtitle mb-2 text-muted">
+                            <translate>logged in: </translate>
+                        </span>
+                        <span>{{logged}}</span>
+                    </div>
 
                 </div>
             </div>

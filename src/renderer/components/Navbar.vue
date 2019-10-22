@@ -28,7 +28,9 @@
 					<!--<b-dropdown-item href="#">12</b-dropdown-item>
 					<b-dropdown-item href="#">23</b-dropdown-item>-->
 				</b-nav-item-dropdown>
-				<b-nav-item href="#" v-b-modal.modalout><span class="logout_icon"></span></b-nav-item>
+<!--				<b-nav-item href="#" v-b-modal.modalout><span class="logout_icon"></span></b-nav-item>-->
+				<b-nav-item href="#" @click="logout"><span class="logout_icon"></span></b-nav-item>
+
 				<b-modal id="modalout" title="" @ok="logout">
 					<p class="my-4">
 						<translate>Are you sure you want to logout?</translate>
@@ -81,6 +83,7 @@
         },
         methods: {
             logout() {
+                console.log ("force logout")
                 this.$store.commit('logout')
                 this.$store.commit('step', 0)
                 this.$router.push('/')
