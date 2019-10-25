@@ -77,7 +77,8 @@
     "vue-gettext": "^2.1.5",
     "vue-native-websocket": "^2.0.5",
     "vue-router": "^2.5.3",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "vue-nav-tabs": "^0.5.7"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

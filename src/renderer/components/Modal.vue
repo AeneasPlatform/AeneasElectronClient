@@ -82,13 +82,10 @@
 
 <script>
     import timeConverter from '@/components/timeFormat.js';
-    import {BFormInput, BTabs} from 'bootstrap-vue'
 
     export default {
         name: 'Modal',
         components: {
-            'b-tab': BTabs,
-            'b-form-input': BFormInput
         },
         props: ['transactions', 'header'],
         data() {

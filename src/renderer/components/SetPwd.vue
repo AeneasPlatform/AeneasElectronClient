@@ -55,15 +55,10 @@
 <script>
     import redirect_to from '../redirect_to'
 
-    import {BButton, BForm, BFormGroup, BFormInput} from 'bootstrap-vue'
 
     export default {
         name: 'SetPwd',
         components: {
-            'b-button': BButton,
-            'b-form-group': BFormGroup,
-            'b-form-input': BFormInput,
-            'b-form': BForm
         },
         data: function () {
             return {

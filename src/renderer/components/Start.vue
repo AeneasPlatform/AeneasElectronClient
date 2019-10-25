@@ -41,16 +41,14 @@
 </template>
 <script>
     import redirect_to from '../redirect_to'
-    import {BDropdown, BDropdownItem} from 'bootstrap-vue'
-    import {mapState} from 'vuex'
+   import {mapState} from 'vuex'
 
     console.log('start view')
 
     export default {
         name: 'Start',
         components: {
-            'b-dropdown': BDropdown,
-            'b-dropdown-item': BDropdownItem
+
         },
         computed: {
             errorMsg() {

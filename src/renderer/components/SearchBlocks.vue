@@ -34,8 +34,6 @@
 </template>
 <script>
   import RecentBlock from '@/components/RecentBlock'
-  import {BFormInput} from 'bootstrap-vue'
-
 
   const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -77,7 +75,6 @@ export default {
   },
   components: {
     'RecentBlock': RecentBlock,
-    'b-form-input': BFormInput
   },
 }
 </script>

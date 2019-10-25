@@ -13,33 +13,18 @@ import VueClipboard from 'vue-clipboard2'
 import store from './store'
 import redirect_to from './redirect_to'
 
-console.log("in main.js before bootstrap vue components")
-
-// import BootstrapVue from "bootstrap-vue";
 // Vue.use(BootstrapVue);
 /** bootstrap vue components */
-import {BModal} from 'bootstrap-vue'
-import {BNavbar} from 'bootstrap-vue'
-import {BDropdown} from 'bootstrap-vue'
-import {BForm, BFormInput, BFormTextarea, BInputGroup, BFormGroup, BButton, BTabs, BTab} from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
 
-Vue.component('b-modal', BModal)
-Vue.component('b-navbar', BNavbar)
-Vue.component('b-dropdown', BDropdown)
-Vue.component('b-form', BForm)
-Vue.component('b-form-input', BFormInput)
-Vue.component('b-input-group', BInputGroup)
-Vue.component('b-form-textarea', BFormTextarea)
-Vue.component('b-form-group', BFormGroup)
-Vue.component('b-button', BButton)
-Vue.component('b-tabs', BTabs)
-Vue.component('b-tab', BTab)
-
-console.log("in main.js before VueClipboard")
+import VueTabs from 'vue-nav-tabs/dist/vue-tabs'
+import 'vue-nav-tabs/themes/vue-tabs.css'
+Vue.use(VueTabs)
 
 Vue.use(VueClipboard)
-
-console.log("in main.js before VueNativeSock")
 
 Vue.use(VueNativeSock, 'ws://localhost:9085/aeneas', {
     store: store,

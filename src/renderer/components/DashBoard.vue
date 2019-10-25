@@ -3,23 +3,23 @@
 		<Navbar></Navbar>
 		<div class="container fill">
 			<WalletInfo></WalletInfo>
-			<b-tabs style="margin-top:20px" v-show="!showSendAsh">
-				<b-tab title="blocks" active>
-					<RecentBlocks></RecentBlocks>
-				</b-tab>
-				<b-tab title="search block">
-					<SearchBlocks></SearchBlocks>
-				</b-tab>
-				<!-- <b-tab title="transactions">
-					<RecentTransactions></RecentTransactions>
-				</b-tab> -->
-				<b-tab title="balances">
-					<RecentBalances></RecentBalances>
-				</b-tab>
-				<b-tab title="wallet info">
-					<OwnWalletInfo></OwnWalletInfo>
-				</b-tab>
-			</b-tabs>
+						<vue-tabs style="margin-top:20px" v-show="!showSendAsh">
+							<v-tab title="blocks" active>
+								<RecentBlocks></RecentBlocks>
+							</v-tab>
+							<v-tab title="search block">
+								<SearchBlocks></SearchBlocks>
+							</v-tab>
+							<!-- <b-tab title="transactions">
+								<RecentTransactions></RecentTransactions>
+							</b-tab> -->
+							<v-tab title="balances">
+								<RecentBalances></RecentBalances>
+							</v-tab>
+							<v-tab title="wallet info">
+								<OwnWalletInfo></OwnWalletInfo>
+							</v-tab>
+						</vue-tabs>
 			<SendAshForm v-show="showSendAsh"></SendAshForm>
 		</div>
 	</div>
@@ -34,8 +34,6 @@
     import OwnWalletInfo from '@/components/OwnWalletInfo'
     import SendAshForm from '@/components/SendAshForm'
 
-    import {BTab, BTabs} from 'bootstrap-vue'
-
 
     export default {
         name: 'DashBoard',
@@ -48,8 +46,6 @@
             'OwnWalletInfo': OwnWalletInfo,
             // 'RecentTransactions': RecentTransactions,
             'SendAshForm': SendAshForm,
-            'b-tabs': BTabs,
-						'b-tab': BTab
         },
         computed: {
             seed() {

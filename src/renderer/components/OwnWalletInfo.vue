@@ -19,8 +19,6 @@
 </template>
 <script>
 
-    import {BButton} from 'bootstrap-vue'
-
     function convertToCSV(objArray) {
         var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
         var str = '';
@@ -42,7 +40,6 @@
     export default {
         name: 'RecentBalances',
         components: {
-          'b-button': BButton
         },
         data: function () {
             return {

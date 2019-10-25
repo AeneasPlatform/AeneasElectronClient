@@ -47,15 +47,10 @@
 </template>
 <script>
     import redirect_to from '../redirect_to'
-    import {BButton, BForm, BFormGroup, BFormInput} from 'bootstrap-vue'
 
     export default {
         name: 'Login',
         components: {
-            'b-form': BForm,
-            'b-form-group': BFormGroup,
-            'b-form-input': BFormInput,
-            'b-button': BButton
         },
         data: function () {
             return {

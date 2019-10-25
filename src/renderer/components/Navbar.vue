@@ -28,10 +28,9 @@
 					<!--<b-dropdown-item href="#">12</b-dropdown-item>
 					<b-dropdown-item href="#">23</b-dropdown-item>-->
 				</b-nav-item-dropdown>
-<!--				<b-nav-item href="#" v-b-modal.modalout><span class="logout_icon"></span></b-nav-item>-->
-				<b-nav-item href="#" @click="logout"><span class="logout_icon"></span></b-nav-item>
+				<b-nav-item @click="testOUT" v-b-modal.modalout><span class="logout_icon"></span></b-nav-item>
 
-				<b-modal id="modalout" title="" @ok="logout">
+				<b-modal v-model="modalShow" @ok="logout">
 					<p class="my-4">
 						<translate>Are you sure you want to logout?</translate>
 					</p>
@@ -42,38 +41,17 @@
 	</b-navbar>
 </template>
 <script>
-    import {
-        BCollapse,
-        BModal,
-        BNavbar,
-        BNavbarBrand,
-        BNavbarNav,
-        BNavbarToggle,
-        BNavItem,
-        BNavItemDropdown,
-        BToggle,
-        VBModal
-    } from 'bootstrap-vue'
 
     export default {
         name: 'Navbar',
         components: {
-            'b-collapse': BCollapse,
-            'b-navbar': BNavbar,
-            'b-navbar-nav': BNavbarNav,
-            'b-navbar-brand': BNavbarBrand,
-            'b-navbar-toggle': BNavbarToggle,
-						'b-nav-item': BNavItem,
-						'b-nav-item-dropdown': BNavItemDropdown,
-            'b-modal': BModal
         },
         directives: {
-            'b-toggle': BToggle,
-            'b-modal': VBModal
         },
         data: function () {
             return {
-                Account: ''// "Account Name"
+                Account: '', // "Account Name"
+                modalShow: false
             }
         },
         computed: {
@@ -94,7 +72,11 @@
             },
             hideSendAsh() {
                 this.$store.commit('showSendAsh', false)
-            }
+            },
+						testOUT() {
+                console.log("logout is pressed")
+								this.modalShow = !this.modalShow
+						}
 
         }
     }

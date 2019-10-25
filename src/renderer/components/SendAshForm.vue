@@ -61,16 +61,11 @@
 <script>
   import {BigNumber} from 'bignumber.js'
   import Validator from './Validator.vue'
-  import {BButton, BForm, BFormGroup, BFormInput, BFormInvalidFeedback} from 'bootstrap-vue'
 
   export default {
   name: 'SendAshForm',
   components: {
-    'b-button': BButton,
-    'b-form': BForm,
-    'b-form-group': BFormGroup,
-    'b-form-input': BFormInput,
-    'b-form-invalid-feedback': BFormInvalidFeedback
+
   },
   data: function () {
     return {

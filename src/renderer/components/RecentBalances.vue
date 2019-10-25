@@ -54,7 +54,6 @@
 </template>
 <script>
     import RecentBalance from '@/components/RecentBalance'
-    import {BButton, BFormInput} from 'bootstrap-vue'
 
     function convertToCSV(objArray) {
         var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
@@ -111,9 +110,7 @@
             }
         },
         components: {
-            'RecentBalance': RecentBalance,
-            'b-button': BButton,
-            'b-form-input': BFormInput
+            'RecentBalance': RecentBalance
         },
         computed: {
             blocks() {

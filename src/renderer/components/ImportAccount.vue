@@ -35,15 +35,9 @@
 <script>
     import redirect_to from '../redirect_to'
 
-    import {BButton, BForm, BFormGroup, BFormTextarea} from 'bootstrap-vue'
-
     export default {
         name: 'ImportAccount',
         components: {
-            'b-form-group': BFormGroup,
-            'b-form': BForm,
-            'b-form-textarea': BFormTextarea,
-			'b-button': BButton
         },
         data: function () {
             return {
