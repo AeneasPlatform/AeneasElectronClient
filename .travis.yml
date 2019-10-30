@@ -1,27 +1,31 @@
+osx: linux
+dist: bionic
 language: node_js
 node_js:
-  - '10'
-os: windows
+  - '11'
 script:
-  - choco install python
+  - npm install
   - npm i -g electron-builder
   - npm rebuild node-sass --force
   - npm run build
   - cd build
-  - mv Aeneas\ Sanctum\ *.msi ../Aeneas.msi
+  - ls
+  - mv Aeneas\ Sanctum\ *.AppImage ../Aeneas.AppImage
+  - ls
   - cd ..
-  - dir
-
+  - ls
+before_deploy:
+  - ls
 deploy:
   provider: releases
-  skip_cleanup: true
   api_key:
-    secure: rQpvLdaGO+0pwOXzMIUoQHOuPckd8vAT/1R0PN/EW03fgYc5ffR7zHrQ/L2pYihnFwlLxojGurb6cqe3TxqwKPho9Szu+gw5+OpCVRpNLwnn95nDTe7Obv51dM346FtT9uf/xGENfj2k1mHvtd3VknGHWqB2YgS1d8siUS3lGRl3rhQnQHKtJVopX8/eu9Sd+pIZzAsSE0SV/chfMSXcL9LaH7AlN2vVn4aoChcRIvU34UYb0kS56LyTjRPdTby7JvmTm5e3CwwoHlFnTF0mBzdbvsUFhlzDjaxzZ9KkEXQ78OZ6lRS2BOW5HqkoEG/aNQITbYMGTeavbXwYUOjGZfD1252UuGsnjhHqCbbvJnjPBa9AgNrHuwLXrnwgnjEExlPd5UF5rT9S3/38ub6IuvVb2gU7ose2mUWl02qjydsuVmkJpJX/Bj4GrXomWXqYvUA04hHj4EPg6bqaTXEVF9GC63A2bE8xGMBy+8RvOGKL5ClQpfbBEVEki78ZSQZkEK+KHHYTryMJYZ28U6UxlIXeWzyVR4jJiTbpKYCA1MPXvRqMHAS89W4NpeiWGjDhpSySfgIuR5S/PAJlvoSajaMKzGJj48gQMw6fWSTXqwmKVjlCkMMwAUjb4WhTaoJ37F3CU4qxxJbRyt45GKByIRttXF3W+UoqtJZ0u8kZSbA=
+    secure: BhSs3K78Z7p2R4gYd1wfQiBCF6esUTa2Ug8cmZQ8soFtAyWMIApFbS9er2pKC80bTbJ9thteb0dSVLT5F6gKD/amQt/YP8GbgE24cs2e7sPk24f58oqqcyP5JnRDaAKykqDQKd86zHWR6ko7ATBNICAD0jJxsULV24+8BcUDkgs/1so3nFT8kvSDeFFOFaDkPoha3j5ER6bRGAqcJTA8PiDxXRVP49oLBm+QrKHITKG1VDU/HqzVj6qg79K/pOwPoPHH8CyEGG+ojdmGzSrWCEVjsA7HanRl8HM46TdAccs7AtipzDdLSx6zFdgTe8jnRt6reue8MzAR+PGA3dhuws71GRI48XF4h+j0CTxkpqqlx4353n9vDsIQcrm2Vo/APPLa1VqYf0wfBnVQAYce2pFclLiD/Q3B1gYHVUol9289rwCgwVYC5/492+1FPrnwUYmdWrWBBsaAmMfI1QqE10RLRsTKIPpqprj/NUjo+nB2uhbBZb6pFdNZnQ7gGdR1V2suuP2gaxw2sxQ4jTORArn5XUfsgyNsARw0RQ/AjZ/fVqLlaYa++Z6KGXSD9lMCkofSz4K73ZF3SJPFHUwk6bLhawBc3dhohBo73QB72PB83mxzObG1NMcK8J+avgUvm//JpmQj7Kkzvz+wavcCLSYDedjwQOjEhOjAF5GP7zI=
+  file_glob: true
   file:
-    - Aeneas.msi
+    - "Aeneas"
   on:
-    repo: AeneasPlatform/AeneasElectronClient
+    tags: true
+    repo: Aeneas/AeneasElectronClient
     branches:
       only:
-        - master
-    tags: true
+        - build-linux
