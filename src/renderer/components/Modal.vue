@@ -6,8 +6,8 @@
 					<div class="tx-modal-body">
 						<slot name="body">
 							<div class="block-id">{{headerId}}</div>
-							<b-tabs style="margin-top:10px;max-height:80%">
-								<b-tab title="general">
+							<vue-tabs style="margin-top:10px;max-height:80%">
+								<v-tab title="general">
 									<div class="table-block">
 										<table class="table blocksfont">
 											<thead>
@@ -33,8 +33,8 @@
 											</tbody>
 										</table>
 									</div>
-								</b-tab>
-								<b-tab title="transfer">
+								</v-tab>
+								<v-tab title="transfer">
 									<div class="table-block">
 										<table class="table blocksfont">
 											<thead>
@@ -65,8 +65,8 @@
 											</tbody>
 										</table>
 									</div>
-								</b-tab>
-							</b-tabs>
+								</v-tab>
+							</vue-tabs>
 						</slot>
 					</div>
 					<div class="tx-modal-footer">
