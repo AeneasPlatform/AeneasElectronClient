@@ -70,7 +70,7 @@
             if (this.$store.state.main.logged) {
                 this.$router.push('/dashboard')
             } else {
-                if (this.$store.state.signInStore.passPhrase.length == 0) {
+                if (this.$store.state.signInStore.passPhrase.length == 0 && this.$store.state.main.seed.length === 0) {
                     this.$router.push('/account')
                 } else {
                     var step = this.$store.state.signInStore.step

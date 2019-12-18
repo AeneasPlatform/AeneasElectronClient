@@ -212,9 +212,10 @@ const store = new Vuex.Store({
       context.commit('route', 'confirm')
     },
     Seed (context, message) {
-      console.log(message)
+      console.log(["Your seed", message])
       context.commit('step', 3)
       context.commit('seed', {seed: message.seed, address: ''})
+      context.commit('route', 'setpwd')
     },
     PwdConfirmed (context, message) {
       console.log(message)
