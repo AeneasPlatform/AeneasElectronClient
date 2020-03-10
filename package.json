@@ -62,7 +62,7 @@
   "dependencies": {
     "bignumber.js": "^8.0.1",
     "bootstrap": "^4.0.0",
-    "bootstrap-vue": "^2.0.0-rc.1",
+    "bootstrap-vue": "2.6.1",
     "bufferutil": "^3.0.3",
     "easygettext": "^2.7.0",
     "jquery": "^3.3.1",
@@ -76,7 +76,7 @@
     "vue-electron": "^1.0.6",
     "vue-gettext": "^2.1.5",
     "vue-native-websocket": "^2.0.5",
-    "vue-router": "^2.5.3",
+    "vue-router": "^3.1.6",
     "vuex": "^2.3.1",
     "vue-nav-tabs": "^0.5.7"
   },
